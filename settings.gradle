@@ -1,0 +1,3 @@
+include ':FirebaseAuth'
+include ':app'
+rootProject.name = "EE-FirebaseAuthExample"
