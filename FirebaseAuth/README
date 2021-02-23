@@ -1,0 +1,9 @@
+Firebase tabanlı authentication işlemleri için hazırlanmıştır.
+Firebase kurulumu gerektirir.
+
+Firebase kurulumu için :
+
+1) build.gradle(project):
+   * dependencyi ekle : classpath 'com.google.gms:google-services:4.3.5'
+2) app klasörünün içine kendi google-services.json dosyanızı ekleyin.
+
