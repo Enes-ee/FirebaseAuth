@@ -1,10 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_purple"
     tools:context=".LoginScreen">
 
 
+    <ImageView
+        android:id="@+id/bg_facebook"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/fui_idp_button_background_facebook"
+        app:layout_constraintBottom_toTopOf="@+id/bg_anonymous"
+        app:layout_constraintEnd_toEndOf="@+id/bg_google"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bg_google" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/bg_email"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/fui_idp_button_background_email"
+        app:layout_constraintBottom_toTopOf="@+id/bg_facebook"
+        app:layout_constraintEnd_toEndOf="@+id/bg_google"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/bg_google" />
+
+    <ImageView
+        android:id="@+id/bg_google"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/fui_idp_button_background_google"
+        app:layout_constraintBottom_toTopOf="@+id/bg_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/bg_anonymous"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="276dp"
+        android:src="@drawable/fui_idp_button_background_anonymous"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bg_google"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bg_google" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/fui_ic_googleg_color_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_google"
+        app:layout_constraintStart_toStartOf="@+id/bg_google"
+        app:layout_constraintTop_toTopOf="@+id/bg_google" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/fui_ic_facebook_white_22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_facebook"
+        app:layout_constraintStart_toStartOf="@+id/bg_facebook"
+        app:layout_constraintTop_toTopOf="@+id/bg_facebook" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/fui_ic_mail_white_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_email"
+        app:layout_constraintStart_toStartOf="@+id/bg_email"
+        app:layout_constraintTop_toTopOf="@+id/bg_email" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/fui_ic_anonymous_white_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_anonymous"
+        app:layout_constraintStart_toStartOf="@+id/bg_anonymous"
+        app:layout_constraintTop_toTopOf="@+id/bg_anonymous" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="monospace"
+        android:text="Sign-in by Google"
+        android:textColor="#222120"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_google"
+        app:layout_constraintEnd_toEndOf="@+id/bg_google"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/bg_google" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="monospace"
+        android:text="Sign-in by E-mail"
+        android:textColor="#222120"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_email"
+        app:layout_constraintEnd_toEndOf="@+id/bg_email"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toTopOf="@+id/bg_email" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="monospace"
+        android:text="Sign-in by Facebook"
+        android:textColor="#222120"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_facebook"
+        app:layout_constraintEnd_toEndOf="@+id/bg_facebook"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/bg_facebook" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="monospace"
+        android:text="Sign-in Anonymous"
+        android:textColor="#222120"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_anonymous"
+        app:layout_constraintEnd_toEndOf="@+id/bg_anonymous"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/bg_anonymous" />
+
+    <TextView
+        android:id="@+id/tvCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Create a new account"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/bg_anonymous"
+        app:layout_constraintStart_toStartOf="@+id/bg_anonymous"
+        app:layout_constraintTop_toBottomOf="@+id/bg_anonymous" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Forgot my password"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvCreateAccount"
+        app:layout_constraintStart_toStartOf="@+id/tvCreateAccount"
+        app:layout_constraintTop_toBottomOf="@+id/tvCreateAccount" />
+</androidx.constraintlayout.widget.ConstraintLayout>
