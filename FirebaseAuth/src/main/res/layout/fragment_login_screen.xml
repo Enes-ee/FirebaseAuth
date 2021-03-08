@@ -19,6 +19,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/bg_google" />
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/bg_email"
         android:layout_width="0dp"
@@ -102,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:fontFamily="monospace"
-        android:text="Sign-in by Google"
+        android:text="@string/sign_in_by_google"
         android:textColor="#222120"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/bg_google"
@@ -117,7 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:fontFamily="monospace"
-        android:text="Sign-in by E-mail"
+        android:text="@string/sign_in_by_e_mail"
         android:textColor="#222120"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/bg_email"
@@ -132,7 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:fontFamily="monospace"
-        android:text="Sign-in by Facebook"
+        android:text="@string/sign_in_by_facebook"
         android:textColor="#222120"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/bg_facebook"
@@ -147,7 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:fontFamily="monospace"
-        android:text="Sign-in Anonymous"
+        android:text="@string/sign_in_anonymous"
         android:textColor="#222120"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/bg_anonymous"
@@ -161,7 +169,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Create a new account"
+        android:text="@string/create_a_new_account"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/bg_anonymous"
         app:layout_constraintStart_toStartOf="@+id/bg_anonymous"
@@ -172,9 +180,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Forgot my password"
+        android:text="@string/forgot_my_password"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/tvCreateAccount"
         app:layout_constraintStart_toStartOf="@+id/tvCreateAccount"
         app:layout_constraintTop_toBottomOf="@+id/tvCreateAccount" />
+
+
+    <!--    <fragment-->
+<!--        android:id="@+id/fragmentContainer"-->
+<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="visible"-->
+<!--        app:defaultNavHost="true"-->
+<!--        app:navGraph="@navigation/navigation"-->
+<!--        tools:visibility="invisible" />-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
