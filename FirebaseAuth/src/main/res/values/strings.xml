@@ -5,10 +5,13 @@
         <string name="facebook_application_id">427688055179427</string>
         <string name="facebook_login_protocol_scheme">fb427688055179427</string>
 
+        //Google API Client ID
+        <string name="googleApiClientId">266888747836-234j8735q1nff7d9v9ca020njnfhlira.apps.googleusercontent.com</string>
+
         //Login Buttons
-        <string name="sign_in_by_google">Sign-in via Google</string>
-        <string name="sign_in_by_e_mail">Sign-in via E-mail</string>
-        <string name="sign_in_by_facebook">Sign-in via Facebook</string>
+        <string name="sign_in_by_google">Sign-in with Google</string>
+        <string name="sign_in_by_e_mail">Sign-in with E-mail</string>
+        <string name="sign_in_by_facebook">Sign-in with Facebook</string>
         <string name="sign_in_anonymous">Sign-in Anonymous</string>
         <string name="create_a_new_account">Create a new account</string>
         <string name="forgot_my_password">Forgot my password</string>

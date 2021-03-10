@@ -15,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 
 class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBinding) {
 
-    private val FBTAG = "Facebook"
+    private val TAG = "FacebookLogin"
     private var auth = Firebase.auth
 
         fun initFacebookLogin(callbackManager: CallbackManager) {
@@ -25,36 +25,36 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
             binding.facebookButton.registerCallback(callbackManager, object :
                 FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
-                    Log.e(FBTAG, "facebook:onSuccess:$loginResult")
+                    Log.e(TAG, "facebook:onSuccess:$loginResult")
                     handleFacebookAccessToken(loginResult.accessToken)
                 }
 
                 override fun onCancel() {
-                    Log.e(FBTAG, "facebook:onCancel")
+                    Log.e(TAG, "facebook:onCancel")
                     // ...
                 }
 
                 override fun onError(error: FacebookException) {
-                    Log.e(FBTAG, "facebook:onError", error)
+                    Log.e(TAG, "facebook:onError", error)
                     // ...
                 }
             })
         }
 
         fun handleFacebookAccessToken(token: AccessToken?) {
-            Log.e(FBTAG, "handleFacebookAccessToken:$token")
+            Log.e(TAG, "handleFacebookAccessToken:$token")
 
             val credential = FacebookAuthProvider.getCredential(token!!.token)
             auth.signInWithCredential(credential)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        Log.e(FBTAG, "signInWithCredential:success")
+                        Log.e(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
 
                     } else {
                         // If sign in fails, display a message to the user.
-                        Log.e(FBTAG, "signInWithCredential:failure", task.exception)
+                        Log.e(TAG, "signInWithCredential:failure", task.exception)
                         Toast.makeText(
                             fragment.activity, "Authentication failed.",
                             Toast.LENGTH_SHORT

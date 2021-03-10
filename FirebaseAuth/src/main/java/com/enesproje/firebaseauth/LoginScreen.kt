@@ -1,32 +1,21 @@
 package com.enesproje.firebaseauth
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.enesproje.firebaseauth.LoginScreenParts.FacebookLogin
-import com.enesproje.firebaseauth.LoginScreenParts.PrebuiltLogin
+import com.enesproje.firebaseauth.LoginScreenParts.GoogleLogin
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
-import com.facebook.AccessToken
 import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginResult
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
-import com.google.firebase.auth.FacebookAuthProvider
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.facebook.login.LoginManager
-import com.facebook.login.widget.LoginButton
-import java.util.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 
 
 class LoginScreen : Fragment() {
@@ -38,7 +27,7 @@ class LoginScreen : Fragment() {
 //    private lateinit var prebuiltLogin : PrebuiltLogin
     private val auth = Firebase.auth
 
-
+    private lateinit var googleLogin : GoogleLogin
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
@@ -46,18 +35,18 @@ class LoginScreen : Fragment() {
 
         initRegisterScreenListener()
 
-        val facebookLogin = FacebookLogin(this,binding)
-
         callbackManager = CallbackManager.Factory.create()
 
-        facebookLogin.initFacebookLogin(callbackManager)
+        FacebookLogin(this,binding).initFacebookLogin(callbackManager)
 
         initFacebookButtonListener()
 
+        //Google Login
+
+        googleLogin = GoogleLogin(this, binding)
+
 //        Firebase tarafından sağlanan hazır giriş ekranı
-//        prebuiltLogin = PrebuiltLogin(this)
-//
-//        prebuiltLogin.loadPreBuiltLoginScreen()
+//        PrebuiltLogin(this).loadPreBuiltLoginScreen()
 
         return binding.root
     }
@@ -91,6 +80,8 @@ class LoginScreen : Fragment() {
 //        prebuiltLogin.preBuiltLoginScreenResult(requestCode,resultCode,data)
 
         callbackManager.onActivityResult(requestCode,resultCode,data)
+
+        googleLogin.googleLoginCallBack(requestCode,data)
 
     }
 
