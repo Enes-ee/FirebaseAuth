@@ -3,7 +3,6 @@ package com.enesproje.firebaseauth.LoginScreenParts
 import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.fragment.app.Fragment
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse

@@ -3,11 +3,9 @@ package com.enesproje.firebaseauth.LoginScreenParts
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.enesproje.firebaseauth.LoginScreen
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
-import com.facebook.AccessToken
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
+import com.facebook.*
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -18,6 +16,14 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
     private val TAG = "FacebookLogin"
     private var auth = Firebase.auth
 
+        fun build(callbackManager: CallbackManager){
+
+            initFacebookLogin(callbackManager)
+
+            initFacebookButtonListener()
+
+        }
+
         fun initFacebookLogin(callbackManager: CallbackManager) {
 
             binding.facebookButton.setFragment(fragment)
@@ -27,6 +33,7 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
                 override fun onSuccess(loginResult: LoginResult) {
                     Log.e(TAG, "facebook:onSuccess:$loginResult")
                     handleFacebookAccessToken(loginResult.accessToken)
+
                 }
 
                 override fun onCancel() {
@@ -51,6 +58,7 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
                         // Sign in success, update UI with the signed-in user's information
                         Log.e(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
+                        (fragment as LoginScreen).successfulLogin()
 
                     } else {
                         // If sign in fails, display a message to the user.
@@ -63,6 +71,29 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
 
                     // ...
                 }
+        }
+
+        fun initFacebookButtonListener() {
+
+            binding.bgFacebook.setOnClickListener {
+
+                var profile : Profile? = Profile.getCurrentProfile()
+
+                Log.e("Current Profile","$profile")
+
+                if (profile != null){
+
+                    val accessToken = AccessToken.getCurrentAccessToken()
+
+                    handleFacebookAccessToken(accessToken)
+
+                }else{
+
+                    binding.facebookButton.performClick()
+
+                }
+
+            }
         }
 
 }

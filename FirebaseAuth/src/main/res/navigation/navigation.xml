@@ -5,17 +5,30 @@
     android:id="@+id/navigation"
     app:startDestination="@id/loginScreen">
     <fragment
-        android:id="@+id/registerScreen"
-        android:name="com.enesproje.firebaseauth.RegisterScreen"
-        android:label="fragment_register_screen"
-        tools:layout="@layout/fragment_register_screen" />
-    <fragment
         android:id="@+id/loginScreen"
         android:name="com.enesproje.firebaseauth.LoginScreen"
         android:label="fragment_login_screen"
         tools:layout="@layout/fragment_login_screen" >
         <action
-            android:id="@+id/action_loginScreen_to_registerScreen"
-            app:destination="@id/registerScreen" />
+            android:id="@+id/action_loginScreen_to_emailRegisterScreen"
+            app:destination="@id/emailRegisterScreen" />
+        <action
+            android:id="@+id/action_loginScreen_to_tempMainScreen"
+            app:destination="@id/tempMainScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailRegisterScreen"
+        android:name="com.enesproje.firebaseauth.EmailRegisterScreen"
+        android:label="fragment_email_register_screen"
+        tools:layout="@layout/fragment_email_register_screen" />
+    <fragment
+        android:id="@+id/tempMainScreen"
+        android:name="com.enesproje.firebaseauth.TempMainScreen"
+        android:label="fragment_temp_main_screen"
+        tools:layout="@layout/fragment_temp_main_screen" >
+        <action
+            android:id="@+id/action_tempMainScreen_to_loginScreen"
+            app:destination="@id/loginScreen"
+            app:popUpTo="@id/loginScreen" />
     </fragment>
 </navigation>
