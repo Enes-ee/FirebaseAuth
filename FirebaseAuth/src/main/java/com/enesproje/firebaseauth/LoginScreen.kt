@@ -1,15 +1,19 @@
 package com.enesproje.firebaseauth
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.enesproje.firebaseauth.LoginScreenParts.EmailLogin
 import com.enesproje.firebaseauth.LoginScreenParts.FacebookLogin
 import com.enesproje.firebaseauth.LoginScreenParts.GoogleLogin
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
@@ -31,6 +35,8 @@ class LoginScreen : Fragment() {
     private lateinit var googleLogin : GoogleLogin
     private lateinit var facebookLogin : FacebookLogin
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         _binding = FragmentLoginScreenBinding.inflate(inflater,container,false)
@@ -49,7 +55,9 @@ class LoginScreen : Fragment() {
         //Email and password Login
         binding.bgEmail.setOnClickListener {
 
-            this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailLoginFragment())
+            val emailLogin = EmailLogin(this,binding)
+
+            emailLogin.createNewDialog()
 
         }
 
@@ -96,8 +104,5 @@ class LoginScreen : Fragment() {
         this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
 
     }
-
-
-
 
 }
