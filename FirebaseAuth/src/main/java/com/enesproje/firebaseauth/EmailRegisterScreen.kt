@@ -26,11 +26,11 @@ class EmailRegisterScreen : Fragment() {
 
         _binding = FragmentEmailRegisterScreenBinding.inflate(inflater,container,false)
 
-        var newAccountEmail = binding.registerEmail.text.toString()
-        var newAccountPassword = binding.registerPassword.text.toString()
-        var newAccountPassword2 = binding.registerPassword2.text.toString()
-
         binding.submit.setOnClickListener{
+
+            var newAccountEmail = binding.registerEmail.text.toString()
+            var newAccountPassword = binding.registerPassword.text.toString()
+            var newAccountPassword2 = binding.registerPassword2.text.toString()
 
             val validity = registeringConditions(newAccountEmail,newAccountPassword,newAccountPassword2)
 
@@ -45,13 +45,14 @@ class EmailRegisterScreen : Fragment() {
 
     private fun registeringConditions(newAccountEmail: String, newAccountPassword: String, newAccountPassword2: String): Boolean {
 
-        if( newAccountPassword == newAccountPassword2 && newAccountPassword.length > 6 ){
+        if( newAccountPassword == newAccountPassword2 && newAccountPassword.length >= 6 ){
 
             //email için regex kullanmak gerekecek
 
             return true
         }else{
             Toast.makeText(this.context,"Conditions aren't met",Toast.LENGTH_SHORT).show()
+            Log.e("conditions","newAccountPassword : $newAccountPassword , newAccountPassword2 : $newAccountPassword2 , newAccountEmail : $newAccountEmail")
             return false
         }
     }
@@ -63,6 +64,7 @@ class EmailRegisterScreen : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.e(TAG, "createUserWithEmail:success")
+                    Toast.makeText(this.context,"Authentication successful",Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
                     //updateUI(user)
                 } else {

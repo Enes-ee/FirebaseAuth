@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_loginScreen_to_tempMainScreen"
             app:destination="@id/tempMainScreen" />
+        <action
+            android:id="@+id/action_loginScreen_to_emailLoginFragment"
+            app:destination="@id/emailLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailRegisterScreen"
@@ -29,6 +32,16 @@
         <action
             android:id="@+id/action_tempMainScreen_to_loginScreen"
             app:destination="@id/loginScreen"
+            app:popUpTo="@id/loginScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailLoginFragment"
+        android:name="com.enesproje.firebaseauth.LoginScreenParts.EmailLoginFragment"
+        android:label="fragment_email_login"
+        tools:layout="@layout/fragment_email_login" >
+        <action
+            android:id="@+id/action_emailLoginFragment_to_tempMainScreen"
+            app:destination="@id/tempMainScreen"
             app:popUpTo="@id/loginScreen" />
     </fragment>
 </navigation>

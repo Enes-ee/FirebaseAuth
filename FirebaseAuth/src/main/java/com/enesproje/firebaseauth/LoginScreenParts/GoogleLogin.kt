@@ -65,7 +65,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
                         Log.e(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
                         //updateUI(user)
-                        (fragment as LoginScreen).successfulLogin()
+                        (fragment as LoginScreen).successfulLoginNavigation()
 
                     } else {
                         // If sign in fails, display a message to the user.

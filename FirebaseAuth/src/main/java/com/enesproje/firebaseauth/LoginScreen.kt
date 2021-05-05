@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -45,6 +46,13 @@ class LoginScreen : Fragment() {
         //Google Login
         googleLogin = GoogleLogin(this, binding)
 
+        //Email and password Login
+        binding.bgEmail.setOnClickListener {
+
+            this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailLoginFragment())
+
+        }
+
 //        Firebase tarafından sağlanan hazır giriş ekranı
 //        PrebuiltLogin(this).loadPreBuiltLoginScreen()
 
@@ -82,11 +90,14 @@ class LoginScreen : Fragment() {
         _binding = null
     }
 
-    fun successfulLogin(){
+
+    fun successfulLoginNavigation() {
 
         this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
 
     }
+
+
 
 
 }

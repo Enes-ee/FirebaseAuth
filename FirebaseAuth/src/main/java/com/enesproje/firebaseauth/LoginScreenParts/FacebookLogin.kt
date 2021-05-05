@@ -58,7 +58,7 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
                         // Sign in success, update UI with the signed-in user's information
                         Log.e(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
-                        (fragment as LoginScreen).successfulLogin()
+                        (fragment as LoginScreen).successfulLoginNavigation()
 
                     } else {
                         // If sign in fails, display a message to the user.
