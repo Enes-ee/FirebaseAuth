@@ -1,5 +1,7 @@
 package com.enesproje.firebaseauth
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -31,14 +33,40 @@ class TempMainScreen : Fragment() {
         return when (item.itemId) {
             R.id.logOut -> {
 
-                auth.signOut()
-                LoginManager.getInstance().logOut()
-                this.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToLoginScreen())
+                exitDialog()
                 return true
 
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun exitDialog(){
+
+        val builder = activity.let {
+            AlertDialog.Builder(it)
+        }
+        builder.setMessage("You are quitting from your account. Are you sure?")
+                .setTitle("Exit")
+
+        builder.apply {
+
+            setPositiveButton("Yes",DialogInterface.OnClickListener { dialog, id ->
+                auth.signOut()
+                LoginManager.getInstance().logOut()
+                dialog.dismiss()
+                this@TempMainScreen.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToLoginScreen())
+            })
+
+            setNegativeButton("Return", DialogInterface.OnClickListener { dialog, id ->
+                dialog.dismiss()
+            })
+
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+
     }
 
 }
