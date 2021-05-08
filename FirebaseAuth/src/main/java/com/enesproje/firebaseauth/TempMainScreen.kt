@@ -7,22 +7,33 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.enesproje.firebaseauth.databinding.FragmentTempMainScreenBinding
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class TempMainScreen : Fragment() {
 
+    var _binding : FragmentTempMainScreenBinding? = null
+    val binding : FragmentTempMainScreenBinding get() = _binding!!
+
     val auth = Firebase.auth
+    var loginType : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
+        _binding = FragmentTempMainScreenBinding.inflate(inflater,container,false)
+
+        loginType = TempMainScreenArgs.fromBundle(requireArguments()).loginType
+
+        binding.tvLoginType.text = "$loginType ile giriş yaptınız."
+
         setHasOptionsMenu(true)
 
-        return inflater.inflate(R.layout.fragment_temp_main_screen, container, false)
+        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -67,6 +78,11 @@ class TempMainScreen : Fragment() {
         val dialog = builder.create()
         dialog.show()
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

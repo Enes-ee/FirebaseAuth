@@ -23,7 +23,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class LoginScreen : Fragment() {
+class LoginScreen : Fragment() , onLoginOptionListener{
 
     private var _binding : FragmentLoginScreenBinding? = null
     private val binding get() = _binding!!
@@ -35,9 +35,13 @@ class LoginScreen : Fragment() {
     private lateinit var googleLogin : GoogleLogin
     private lateinit var facebookLogin : FacebookLogin
 
+    private var loginType : String? = null
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        this.loginType = null
 
         _binding = FragmentLoginScreenBinding.inflate(inflater,container,false)
 
@@ -101,8 +105,17 @@ class LoginScreen : Fragment() {
 
     fun successfulLoginNavigation() {
 
-        this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
+        this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen(loginType!!))
 
     }
 
+    override fun onLogin(loginType: String) {
+
+        this.loginType = loginType
+
+    }
+
+
 }
+
+

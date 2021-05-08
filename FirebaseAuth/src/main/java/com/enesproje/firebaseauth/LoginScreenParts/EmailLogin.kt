@@ -7,9 +7,11 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.enesproje.firebaseauth.LoginScreen
 import com.enesproje.firebaseauth.LoginScreenDirections
 import com.enesproje.firebaseauth.R
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
+import com.enesproje.firebaseauth.onLoginOptionListener
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -52,7 +54,8 @@ class EmailLogin(var fragment : Fragment,var binding : FragmentLoginScreenBindin
                                 Log.e(TAG, "signInWithEmail:success")
                                 val user = auth.currentUser
                                 dialog.dismiss()
-                                fragment.findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
+                                (fragment as onLoginOptionListener).onLogin("E-mail")
+                                (fragment as LoginScreen).successfulLoginNavigation()
 
                             } else {
                                 // If sign in fails, display a message to the user.

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.enesproje.firebaseauth.LoginScreen
 import com.enesproje.firebaseauth.R
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
+import com.enesproje.firebaseauth.onLoginOptionListener
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -20,11 +21,8 @@ import com.google.firebase.ktx.Firebase
 class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBinding){
 
     val auth = Firebase.auth
-
     val gso : GoogleSignInOptions
-
     val mGoogleSignInClient : GoogleSignInClient
-
     private val TAG = "GoogleLogin"
 
 
@@ -65,6 +63,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
                         Log.e(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
                         //updateUI(user)
+                        (fragment as onLoginOptionListener).onLogin("Google")
                         (fragment as LoginScreen).successfulLoginNavigation()
 
                     } else {

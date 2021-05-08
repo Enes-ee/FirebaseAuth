@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.enesproje.firebaseauth.LoginScreen
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
+import com.enesproje.firebaseauth.onLoginOptionListener
 import com.facebook.*
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
@@ -58,6 +59,7 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
                         // Sign in success, update UI with the signed-in user's information
                         Log.e(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
+                        (fragment as onLoginOptionListener).onLogin("Facebook")
                         (fragment as LoginScreen).successfulLoginNavigation()
 
                     } else {

@@ -30,5 +30,8 @@
             android:id="@+id/action_tempMainScreen_to_loginScreen"
             app:destination="@id/loginScreen"
             app:popUpTo="@id/loginScreen" />
+        <argument
+            android:name="loginType"
+            app:argType="string" />
     </fragment>
 </navigation>
