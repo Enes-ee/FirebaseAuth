@@ -61,6 +61,12 @@ class LoginScreen : Fragment() {
 
         }
 
+        binding.tvForgotPassword.setOnClickListener {
+
+            ForgottenPassword().show(parentFragmentManager,"ForgottenPasswordFragment")
+
+        }
+
 //        Firebase tarafından sağlanan hazır giriş ekranı
 //        PrebuiltLogin(this).loadPreBuiltLoginScreen()
 

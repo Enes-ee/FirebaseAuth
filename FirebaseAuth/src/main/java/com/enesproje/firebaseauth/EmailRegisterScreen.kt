@@ -71,7 +71,7 @@ class EmailRegisterScreen : Fragment() {
             }
         }
 
-        if (stage == 4) return true else return false
+        return stage == 4
     }
 
 

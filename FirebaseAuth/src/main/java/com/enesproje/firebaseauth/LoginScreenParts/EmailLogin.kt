@@ -50,17 +50,30 @@ class EmailLogin(var fragment : Fragment) {
 
     }
 
-    private fun loggingConditions(email : String? , password : String?): Boolean {
+    private fun loggingConditions(email : String , password : String): Boolean {
+        var stage: Int = 1
 
-        if( password.isNullOrEmpty() == false && password.length >= 6 ){
+        while(stage < 3){
 
-            //email için regex kullanmak gerekecek
+            when(stage){
 
-            return true
-        }else{
-            Toast.makeText(fragment.context,"Conditions aren't met",Toast.LENGTH_SHORT).show()
-            return false
+                1 -> if (password.length >= 6) stage++ else {
+                    Toast.makeText(fragment.context, "You should check your password. It can not be less than 6 characters.", Toast.LENGTH_SHORT).show()
+                    break
+                }
+
+                2 -> {
+                    val regex = Regex(""".+@\w+\.\w+""")
+                    val sonuc = regex.matchEntire(email!!)
+                    if (!sonuc?.value.isNullOrEmpty()) stage++ else {
+                        Toast.makeText(fragment.context, "You have entered an invalid e-mail adress", Toast.LENGTH_SHORT).show()
+                        break
+                    }
+                }
+            }
         }
+
+        return stage == 3
     }
 
 
