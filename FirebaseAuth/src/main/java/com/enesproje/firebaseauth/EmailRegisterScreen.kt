@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.enesproje.firebaseauth.LoginScreenParts.EmailLogin
 import com.enesproje.firebaseauth.databinding.FragmentEmailRegisterScreenBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -44,18 +46,35 @@ class EmailRegisterScreen : Fragment() {
     }
 
     private fun registeringConditions(newAccountEmail: String, newAccountPassword: String, newAccountPassword2: String): Boolean {
+        var stage: Int = 1
 
-        if( newAccountPassword == newAccountPassword2 && newAccountPassword.length >= 6 ){
+        while(stage < 4){
 
-            //email için regex kullanmak gerekecek
+            when(stage){
 
-            return true
-        }else{
-            Toast.makeText(this.context,"Conditions aren't met",Toast.LENGTH_SHORT).show()
-            Log.e("conditions","newAccountPassword : $newAccountPassword , newAccountPassword2 : $newAccountPassword2 , newAccountEmail : $newAccountEmail")
-            return false
+                1 -> if (newAccountPassword.length >= 6) stage++ else {
+                    Toast.makeText(this.context, "Password length is less than 6 characters", Toast.LENGTH_SHORT).show()
+                    break
+                }
+                2 -> if (newAccountPassword == newAccountPassword2) stage++ else {
+                    Toast.makeText(this.context, "Entered passwords do not match", Toast.LENGTH_SHORT).show()
+                    break
+                }
+                3 -> {
+                    val regex = Regex(""".+@\w+\.\w+""")
+                    val sonuc = regex.matchEntire(newAccountEmail)
+                    if (!sonuc?.value.isNullOrEmpty()) stage++ else {
+                        Toast.makeText(this.context, "Entered e-mail adress does not meet requirements", Toast.LENGTH_SHORT).show()
+                        break
+                    }
+                }
+            }
         }
+
+        if (stage == 4) return true else return false
     }
+
+
 
 
     private fun registerToFirebase(email : String , password : String) {
@@ -64,18 +83,19 @@ class EmailRegisterScreen : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.e(TAG, "createUserWithEmail:success")
-                    Toast.makeText(this.context,"Authentication successful",Toast.LENGTH_SHORT).show()
-                    val user = auth.currentUser
+                    Toast.makeText(this.context,"You have registered successfully",Toast.LENGTH_SHORT).show()
+                    this.findNavController().navigate(EmailRegisterScreenDirections.actionEmailRegisterScreenToTempMainScreen("E-mail"))
                     //updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.e(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(this.context, "Authentication failed.",
+                    Toast.makeText(this.context, "An error occured during registration",
                         Toast.LENGTH_SHORT).show()
                     //updateUI(null)
                 }
             }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
