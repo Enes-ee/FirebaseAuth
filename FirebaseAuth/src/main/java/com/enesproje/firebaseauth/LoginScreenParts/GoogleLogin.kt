@@ -60,7 +60,6 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.e(TAG, "signInWithCredential:success")
-                        val user = auth.currentUser
                         //updateUI(user)
                         (fragment as LoginScreen).successfulLoginNavigation("Google")
 

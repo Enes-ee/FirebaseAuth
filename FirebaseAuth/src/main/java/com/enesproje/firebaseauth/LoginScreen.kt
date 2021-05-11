@@ -55,9 +55,7 @@ class LoginScreen : Fragment() {
         //Email and password Login
         binding.bgEmail.setOnClickListener {
 
-            val emailLogin = EmailLogin(this)
-
-            emailLogin.createNewDialog()
+            this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailLogin())
 
         }
 
