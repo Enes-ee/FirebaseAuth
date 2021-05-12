@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //MyColors
+    <color name="ee_color_facebook">#A61F79FF</color>
+    <color name="ee_color_google">#A6FFFFFF</color>
+    <color name="ee_color_email">#A6FA1B1B</color>
+    <color name="ee_color_anonymous">#A6FFED00</color>
+    <color name="ee_button_color">#FFBB00</color>
+    <color name="ee_textview_color">#59000000</color>
+
+
+</resources>
