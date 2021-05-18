@@ -23,7 +23,7 @@ class TempMainScreen : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentTempMainScreenBinding.inflate(inflater,container,false)
 
@@ -45,6 +45,13 @@ class TempMainScreen : Fragment() {
             R.id.logOut -> {
 
                 exitDialog()
+                return true
+
+            }
+
+            R.id.accountSettings -> {
+
+                this.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToAccountSettingsScreen())
                 return true
 
             }

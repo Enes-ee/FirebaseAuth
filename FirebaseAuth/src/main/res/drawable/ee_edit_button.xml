@@ -10,11 +10,15 @@
     </item>
 
     <item>
+
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorAccent" />
+
+            <solid android:color="@color/colorAccent"/>
+            <size android:height="50dp" android:width="330dp"/>
             <corners android:radius="25dp"/>
-            <size android:height="50dp" android:width="150dp"/>
+
         </shape>
+
     </item>
 
 </ripple>

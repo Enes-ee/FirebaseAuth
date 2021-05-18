@@ -8,5 +8,9 @@
         app:showAsAction="always">
     </item>
 
+    <item android:id="@+id/accountSettings"
+        android:title="Account Settings">
+    </item>
+
 
 </menu>

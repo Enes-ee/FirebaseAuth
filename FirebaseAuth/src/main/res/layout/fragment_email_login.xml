@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/ee_loginscreen_bg"
+    android:background="@drawable/ee_background"
     tools:context=".LoginScreenParts.EmailLogin">
 
     <EditText
@@ -12,53 +12,37 @@
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/ee_textview"
         android:ems="10"
+        android:hint="E-mail"
         android:inputType="textEmailAddress"
-        android:paddingLeft="40dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="15dp"
         android:textColor="#FFFFFF"
+        android:textColorHint="@color/ee_hint_color"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_email" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/loginPassword"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/ee_textview"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:paddingLeft="40dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="15dp"
         android:textColor="#FFFFFF"
+        android:textColorHint="@color/ee_hint_color"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/loginEmail"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/loginEmail"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_password" />
-
-    <TextView
-        android:id="@+id/tv_login_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="E-mail"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/loginEmail"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_login_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Password"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/loginEmail"
         app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
 
@@ -71,10 +55,10 @@
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/ee_button"
-        android:fontFamily="monospace"
+        android:fontFamily="sans-serif-medium"
         android:text="LOGIN"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/loginEmail"
         app:layout_constraintStart_toStartOf="@+id/loginEmail"

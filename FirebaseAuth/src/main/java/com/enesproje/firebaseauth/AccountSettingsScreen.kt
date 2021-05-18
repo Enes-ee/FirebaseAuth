@@ -10,7 +10,7 @@ class AccountSettingsScreen : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_login_screen, container, false)
+        return inflater.inflate(R.layout.fragment_account_settings_screen, container, false)
     }
 
 }

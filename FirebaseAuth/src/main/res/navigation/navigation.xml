@@ -45,6 +45,9 @@
         <argument
             android:name="loginType"
             app:argType="string" />
+        <action
+            android:id="@+id/action_tempMainScreen_to_accountSettingsScreen"
+            app:destination="@id/accountSettingsScreen" />
     </fragment>
     <dialog
         android:id="@+id/emailLogin"
@@ -57,4 +60,9 @@
             app:popUpTo="@id/loginScreen"
             app:popUpToInclusive="true" />
     </dialog>
+    <fragment
+        android:id="@+id/accountSettingsScreen"
+        android:name="com.enesproje.firebaseauth.AccountSettingsScreen"
+        android:label="fragment_account_settings_screen"
+        tools:layout="@layout/fragment_account_settings_screen" />
 </navigation>
