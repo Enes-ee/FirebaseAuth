@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
@@ -17,8 +18,12 @@ import com.enesproje.firebaseauth.LoginScreenParts.EmailLogin
 import com.enesproje.firebaseauth.LoginScreenParts.FacebookLogin
 import com.enesproje.firebaseauth.LoginScreenParts.GoogleLogin
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
+import com.enesproje.firebaseauth.login_screen_components.AnonymousLogin
 import com.facebook.CallbackManager
 import com.facebook.login.LoginManager
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.util.data.ProviderUtils
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -30,18 +35,17 @@ class LoginScreen : Fragment() {
 
     private lateinit var callbackManager : CallbackManager
 //    private lateinit var prebuiltLogin : PrebuiltLogin
-    private val auth = Firebase.auth
+
+    private val user = Firebase.auth.currentUser
 
     private lateinit var googleLogin : GoogleLogin
     private lateinit var facebookLogin : FacebookLogin
-
+    private lateinit var anonymousLogin: AnonymousLogin
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         _binding = FragmentLoginScreenBinding.inflate(inflater,container,false)
-
-        initRegisterScreenListener()
 
         callbackManager = CallbackManager.Factory.create()
 
@@ -53,22 +57,39 @@ class LoginScreen : Fragment() {
         googleLogin = GoogleLogin(this, binding)
 
         //Email and password Login
-        binding.bgEmail.setOnClickListener {
+        initEmailLogin()
 
-            this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailLogin())
+        //Anonymous Login
+        anonymousLogin = AnonymousLogin(this,binding)
 
-        }
+        initForgottenPassword()
+
+        initRegisterScreenListener()
+
+
+//        Firebase tarafından sağlanan hazır giriş ekranı
+//        PrebuiltLogin(this).loadPreBuiltLoginScreen()
+
+                return binding.root
+    }
+
+    private fun initForgottenPassword() {
 
         binding.tvForgotPassword.setOnClickListener {
 
             ForgottenPassword().show(parentFragmentManager,"ForgottenPasswordFragment")
 
         }
+    }
 
-//        Firebase tarafından sağlanan hazır giriş ekranı
-//        PrebuiltLogin(this).loadPreBuiltLoginScreen()
+    private fun initEmailLogin() {
 
-                return binding.root
+        binding.emailLoginButton.setOnClickListener {
+
+            this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailLogin())
+
+        }
+
     }
 
 
@@ -77,8 +98,6 @@ class LoginScreen : Fragment() {
         binding.tvCreateAccount.setOnClickListener {
 
             it.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailRegisterScreen())
-
-            Log.e("NOT","register screen aktif")
 
         }
 
@@ -97,15 +116,29 @@ class LoginScreen : Fragment() {
 
     }
 
+
+
+
+    fun successfulLoginNavigation() {
+
+        this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
+
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (user != null){
 
-    fun successfulLoginNavigation(loginType : String) {
+            successfulLoginNavigation()
 
-        this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen(loginType))
+        }
+
 
     }
 

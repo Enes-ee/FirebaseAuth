@@ -11,10 +11,18 @@
         tools:layout="@layout/fragment_login_screen" >
         <action
             android:id="@+id/action_loginScreen_to_emailRegisterScreen"
-            app:destination="@id/emailRegisterScreen" />
+            app:destination="@id/emailRegisterScreen"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
         <action
             android:id="@+id/action_loginScreen_to_tempMainScreen"
             app:destination="@id/tempMainScreen"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
             app:popUpTo="@id/loginScreen"
             app:popUpToInclusive="true" />
         <action
@@ -40,14 +48,19 @@
         <action
             android:id="@+id/action_tempMainScreen_to_loginScreen"
             app:destination="@id/loginScreen"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_to_left"
             app:popUpTo="@id/tempMainScreen"
             app:popUpToInclusive="true" />
-        <argument
-            android:name="loginType"
-            app:argType="string" />
         <action
             android:id="@+id/action_tempMainScreen_to_accountSettingsScreen"
-            app:destination="@id/accountSettingsScreen" />
+            app:destination="@id/accountSettingsScreen"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
     </fragment>
     <dialog
         android:id="@+id/emailLogin"

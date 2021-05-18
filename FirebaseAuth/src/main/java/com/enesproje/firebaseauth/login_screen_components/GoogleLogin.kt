@@ -40,7 +40,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
 
     fun initGoogleLogin(){
 
-        binding.bgGoogle.setOnClickListener {
+        binding.googleLoginButton.setOnClickListener {
 
             signIn()
 
@@ -61,7 +61,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
                         // Sign in success, update UI with the signed-in user's information
                         Log.e(TAG, "signInWithCredential:success")
                         //updateUI(user)
-                        (fragment as LoginScreen).successfulLoginNavigation("Google")
+                        (fragment as LoginScreen).successfulLoginNavigation()
 
                     } else {
                         // If sign in fails, display a message to the user.

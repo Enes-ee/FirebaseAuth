@@ -57,7 +57,7 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.e(TAG, "signInWithCredential:success")
-                        (fragment as LoginScreen).successfulLoginNavigation("Facebook")
+                        (fragment as LoginScreen).successfulLoginNavigation()
 
                     } else {
                         // If sign in fails, display a message to the user.
@@ -74,7 +74,7 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
 
         fun initFacebookButtonListener() {
 
-            binding.bgFacebook.setOnClickListener {
+            binding.facebookLoginButton.setOnClickListener {
 
                 var profile : Profile? = Profile.getCurrentProfile()
 

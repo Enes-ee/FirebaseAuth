@@ -84,7 +84,7 @@ class EmailRegisterScreen : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.e(TAG, "createUserWithEmail:success")
                     Toast.makeText(this.context,"You have registered successfully",Toast.LENGTH_SHORT).show()
-                    this.findNavController().navigate(EmailRegisterScreenDirections.actionEmailRegisterScreenToTempMainScreen("E-mail"))
+                    this.findNavController().navigate(EmailRegisterScreenDirections.actionEmailRegisterScreenToTempMainScreen())
                     //updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.

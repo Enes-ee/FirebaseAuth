@@ -16,6 +16,13 @@
     <string name="create_a_new_account">Create a new account</string>
     <string name="forgot_my_password">Forgot my password</string>
 
+    //TempMainScreen
+    <string name="anonymous_authentication">Logged in anonymously</string>
+
+    //AccountSettingsScreen
+
+    <string name="unverified_email">* Your e-mail has not been verified.</string>
+
 
 
 </resources>

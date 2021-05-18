@@ -1,11 +1,14 @@
 package com.enesproje.firebaseauth.LoginScreenParts
 
 import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -31,6 +34,8 @@ class EmailLogin : DialogFragment() {
         _binding = FragmentEmailLoginBinding.inflate(inflater,container,false)
 
         createNewDialog()
+
+        roundCornersofDialog()
 
         return binding.root
     }
@@ -63,7 +68,7 @@ class EmailLogin : DialogFragment() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.e(TAG, "signInWithEmail:success")
-                        this.findNavController().navigate(EmailLoginDirections.actionEmailLoginToTempMainScreen("EmailLogin"))
+                        this.findNavController().navigate(EmailLoginDirections.actionEmailLoginToTempMainScreen())
 
                     } else {
                         // If sign in fails, display a message to the user.
@@ -100,6 +105,18 @@ class EmailLogin : DialogFragment() {
 
         return stage == 3
     }
+
+    fun roundCornersofDialog(){
+
+        if (dialog != null && dialog!!.window != null) {
+
+            dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
+
+        }
+
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

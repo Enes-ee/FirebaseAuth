@@ -18,7 +18,6 @@ class TempMainScreen : Fragment() {
     val binding : FragmentTempMainScreenBinding get() = _binding!!
 
     val auth = Firebase.auth
-    var loginType : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +26,11 @@ class TempMainScreen : Fragment() {
 
         _binding = FragmentTempMainScreenBinding.inflate(inflater,container,false)
 
-        loginType = TempMainScreenArgs.fromBundle(requireArguments()).loginType
+        if (auth.currentUser.isAnonymous) {
 
-        binding.tvLoginType.text = "$loginType ile giriş yaptınız."
+            binding.tvLoginType.text = getString(R.string.anonymous_authentication)
+
+        }
 
         setHasOptionsMenu(true)
 
