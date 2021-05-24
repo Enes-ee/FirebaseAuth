@@ -3,8 +3,8 @@ package com.enesproje.firebaseauth
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.enesproje.firebaseauth.databinding.FragmentTempMainScreenBinding
@@ -26,39 +26,39 @@ class TempMainScreen : Fragment() {
 
         _binding = FragmentTempMainScreenBinding.inflate(inflater,container,false)
 
+        setComponents()
+
+        onBackPressed()
+
+        return binding.root
+    }
+
+    private fun setComponents() {
+
+        binding.buttonAccountSettings.setOnClickListener {
+
+            this.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToAccountSettingsScreen())
+
+        }
+
+        binding.buttonQuit.setOnClickListener {
+
+            exitDialog()
+
+        }
+
         if (auth.currentUser.isAnonymous) {
 
             binding.tvLoginType.text = getString(R.string.anonymous_authentication)
 
         }
 
-        setHasOptionsMenu(true)
-
-        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.temp_main_screen_menu,menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.logOut -> {
-
-                exitDialog()
-                return true
-
-            }
-
-            R.id.accountSettings -> {
-
-                this.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToAccountSettingsScreen())
-                return true
-
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     fun exitDialog(){
 
@@ -88,9 +88,21 @@ class TempMainScreen : Fragment() {
 
     }
 
+    private fun onBackPressed() {
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+
+            exitDialog()
+
+        }
+
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
+
 
 }

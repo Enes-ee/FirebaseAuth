@@ -4,28 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light"
+    android:background="@drawable/ee_background"
     tools:context=".TempMainScreen">
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="125dp"
         android:text="Temp Main Screen"
         android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvLoginType"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:text="login type"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/textView9"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <Button
+        android:id="@+id/buttonQuit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/ee_button"
+        android:text="QUIT"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvLoginType"
+        app:layout_constraintStart_toStartOf="@+id/tvLoginType"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAccountSettings" />
+
+    <Button
+        android:id="@+id/buttonAccountSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="125dp"
+        android:background="@drawable/ee_button"
+        android:text="Account Settings"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvLoginType"
+        app:layout_constraintStart_toStartOf="@+id/tvLoginType"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginType" />
 </androidx.constraintlayout.widget.ConstraintLayout>

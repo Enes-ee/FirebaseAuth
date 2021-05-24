@@ -165,11 +165,23 @@ class AccountSettingsScreen : Fragment() {
 
     private fun initChangePasswordFields() {
 
+        val animPassword = AnimationUtils.loadAnimation(this.context,R.anim.fade_in)
+
+        val animButtonChangePassword = AnimationUtils.loadAnimation(this.context,R.anim.fade_out)
+
         binding.buttonChangePassword.setOnClickListener {
 
             it.visibility = View.GONE
+
+            it.startAnimation(animButtonChangePassword)
+
             binding.settingsPassword.visibility = View.VISIBLE
+
+            binding.settingsPassword.startAnimation(animPassword)
+
             binding.settingsPassword2.visibility = View.VISIBLE
+
+            binding.settingsPassword2.startAnimation(animPassword)
 
         }
 
@@ -185,16 +197,12 @@ class AccountSettingsScreen : Fragment() {
 
                 if (eachComponent.text.toString().length == 1) {
 
-                    binding.buttonSave2.visibility = View.VISIBLE
-
-                    val saveButtonAnimation = AnimationUtils.loadAnimation(this.context,R.anim.save_button)
-                    binding.buttonSave2.startAnimation(saveButtonAnimation)
-
+                    binding.buttonSave.visibility = View.VISIBLE
 
 
                 } else if (eachComponent.text.isNullOrEmpty()) {
 
-                    binding.buttonSave2.visibility = View.GONE
+                    binding.buttonSave.visibility = View.GONE
 
                 }
 

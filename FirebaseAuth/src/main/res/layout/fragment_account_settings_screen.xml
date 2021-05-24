@@ -22,9 +22,9 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:text="ACCOUNT SETTINGS"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="70dp"
                 android:layout_marginEnd="15dp"
                 app:cardBackgroundColor="#33FFFFFF"
                 app:cardElevation="2dp"
@@ -46,18 +46,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
-                    <Button
-                        android:id="@+id/button_save2"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginEnd="60dp"
-                        android:background="@drawable/check_mark_ripple"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@+id/settingsUsername"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView4"
-                        tools:visibility="visible" />
 
                     <TextView
                         android:id="@+id/textView5"
@@ -76,7 +64,7 @@
                         android:layout_height="50dp"
                         android:layout_marginStart="25dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="60dp"
+                        android:layout_marginEnd="25dp"
                         android:background="@drawable/ee_textview"
                         android:paddingStart="30dp"
                         android:paddingEnd="15dp"
@@ -247,16 +235,16 @@
 
 
             <Button
-                android:id="@+id/button_save"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/check_mark_ripple"
+                android:id="@+id/buttonSave"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/ee_button"
+                android:text="SAVE"
+                android:textColor="#FFFFFF"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+                app:layout_constraintBottom_toTopOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
