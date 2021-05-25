@@ -11,7 +11,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="75dp"
         android:text="Temp Main Screen"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,19 +33,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/ee_button"
         android:text="QUIT"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvLoginType"
         app:layout_constraintStart_toStartOf="@+id/tvLoginType"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAccountSettings" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAccountSettings"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonAccountSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/ee_button"
         android:text="Account Settings"
         android:textAllCaps="false"

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ee_background"
+    tools:context=".AccountSettingsScreen">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="ACCOUNT SETTINGS"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="#33FFFFFF"
+                app:cardElevation="2dp"
+                app:layout_constraintEnd_toStartOf="@+id/cardView2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView6">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="E-mail"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="@+id/settingsUsername"
+                        app:layout_constraintStart_toStartOf="@+id/settingsUsername"
+                        app:layout_constraintTop_toBottomOf="@+id/settingsUsername" />
+
+                    <EditText
+                        android:id="@+id/settingsUsername"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="25dp"
+                        android:background="@drawable/ee_textview"
+                        android:paddingStart="30dp"
+                        android:paddingEnd="15dp"
+                        android:singleLine="true"
+                        android:textColor="#FFEB3B"
+                        android:textColorHint="#FFFFFF"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.516"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                    <EditText
+                        android:id="@+id/settingsEmail"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/ee_textview"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="30dp"
+                        android:paddingEnd="15dp"
+                        android:singleLine="true"
+                        android:textColor="#FFEB3B"
+                        android:textColorHint="#FFFFFF"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView5"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:text="Username"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="@+id/settingsUsername"
+                        app:layout_constraintStart_toStartOf="@+id/settingsUsername"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/buttonVerifyEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/ee_edit_button"
+                        android:text="VERIFY"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/settingsEmail"
+                        app:layout_constraintStart_toStartOf="@+id/settingsEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/tvVerifyEmail" />
+
+                    <TextView
+                        android:id="@+id/tvVerifyEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/unverified_email"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/settingsEmail"
+                        app:layout_constraintStart_toStartOf="@+id/settingsEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/settingsEmail" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="#33FFFFFF"
+                app:cardElevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintTop_toTopOf="@+id/cardView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <Button
+                        android:id="@+id/button_change_password"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/ee_edit_button"
+                        android:text="Change Password"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/settingsPassword"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="25dp"
+                        android:background="@drawable/ee_textview"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:paddingStart="30dp"
+                        android:paddingEnd="15dp"
+                        android:singleLine="true"
+                        android:textColor="#FFEB3B"
+                        android:textColorHint="#FFFFFF"
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/settingsPassword2"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/ee_textview"
+                        android:hint="Password (again)"
+                        android:inputType="textPassword"
+                        android:paddingStart="30dp"
+                        android:paddingEnd="15dp"
+                        android:singleLine="true"
+                        android:textColor="#FFEB3B"
+                        android:textColorHint="#FFFFFF"
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/settingsPassword"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/settingsPassword"
+                        app:layout_constraintTop_toBottomOf="@+id/settingsPassword"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/ee_button"
+                android:text="SAVE"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView2"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
