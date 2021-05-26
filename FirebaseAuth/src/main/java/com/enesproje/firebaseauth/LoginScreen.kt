@@ -86,7 +86,7 @@ class LoginScreen : Fragment() {
 
         binding.emailLoginButton.setOnClickListener {
 
-            this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailLogin())
+            it.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailLogin())
 
         }
 
@@ -133,6 +133,9 @@ class LoginScreen : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        ForceUpdateChecker.with(this.requireActivity(),this).checkAsynchronous(60)
+
         if (user != null){
 
             successfulLoginNavigation()

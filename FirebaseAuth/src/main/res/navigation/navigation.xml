@@ -27,6 +27,11 @@
         <action
             android:id="@+id/action_loginScreen_to_emailLogin"
             app:destination="@id/emailLogin" />
+        <action
+            android:id="@+id/action_loginScreen_to_forceUpdate"
+            app:destination="@id/forceUpdate"
+            app:popUpTo="@id/loginScreen"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/emailRegisterScreen"
@@ -77,4 +82,13 @@
         android:name="com.enesproje.firebaseauth.AccountSettingsScreen"
         android:label="fragment_account_settings_screen"
         tools:layout="@layout/fragment_account_settings_screen" />
+    <dialog
+        android:id="@+id/forceUpdate"
+        android:name="com.enesproje.firebaseauth.ForceUpdate"
+        android:label="fragment_force_update"
+        tools:layout="@layout/fragment_force_update" >
+        <argument
+            android:name="updateUrl"
+            app:argType="string" />
+    </dialog>
 </navigation>

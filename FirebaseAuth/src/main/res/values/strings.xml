@@ -23,6 +23,9 @@
 
     <string name="unverified_email">* Your e-mail has not been verified.</string>
 
+    //ForceUpdate
+
+    <string name="forceUpdateDialog">New version is available. Would you like to update? </string>
 
 
 </resources>
