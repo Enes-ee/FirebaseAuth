@@ -43,7 +43,7 @@ class TempMainScreen : Fragment() {
 
         binding.buttonQuit.setOnClickListener {
 
-            exitDialog()
+            this.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToQuitAccount())
 
         }
 
@@ -60,39 +60,11 @@ class TempMainScreen : Fragment() {
     }
 
 
-    fun exitDialog(){
-
-        val builder = activity.let {
-            AlertDialog.Builder(it)
-        }
-        builder.setMessage("You are quitting from your account. Are you sure?")
-                .setTitle("Exit")
-
-        builder.apply {
-
-            setPositiveButton("Yes",DialogInterface.OnClickListener { dialog, id ->
-                auth.signOut()
-                LoginManager.getInstance().logOut()
-                dialog.dismiss()
-                this@TempMainScreen.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToLoginScreen())
-            })
-
-            setNegativeButton("Return", DialogInterface.OnClickListener { dialog, id ->
-                dialog.dismiss()
-            })
-
-        }
-
-        val dialog = builder.create()
-        dialog.show()
-
-    }
-
     private fun onBackPressed() {
 
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
 
-            exitDialog()
+            this@TempMainScreen.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToQuitAccount())
 
         }
 

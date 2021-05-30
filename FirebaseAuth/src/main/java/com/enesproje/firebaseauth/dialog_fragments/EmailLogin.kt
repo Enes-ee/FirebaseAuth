@@ -1,4 +1,4 @@
-package com.enesproje.firebaseauth.LoginScreenParts
+package com.enesproje.firebaseauth.dialog_fragments
 
 import android.app.AlertDialog
 import android.graphics.Color

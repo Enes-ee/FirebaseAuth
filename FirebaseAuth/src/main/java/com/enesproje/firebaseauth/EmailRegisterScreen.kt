@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.enesproje.firebaseauth.LoginScreenParts.EmailLogin
+import com.enesproje.firebaseauth.dialog_fragments.EmailLogin
 import com.enesproje.firebaseauth.databinding.FragmentEmailRegisterScreenBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

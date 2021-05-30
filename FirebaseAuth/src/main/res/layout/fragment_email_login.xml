@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/ee_dialog_background"
-    tools:context=".LoginScreenParts.EmailLogin">
+    tools:context=".dialog_fragments.EmailLogin">
 
     <EditText
         android:id="@+id/loginEmail"

@@ -1,4 +1,4 @@
-package com.enesproje.firebaseauth
+package com.enesproje.firebaseauth.dialog_fragments
 
 import android.content.Intent
 import android.graphics.Color

@@ -1,29 +1,19 @@
 package com.enesproje.firebaseauth
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.EditText
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.enesproje.firebaseauth.LoginScreenParts.EmailLogin
-import com.enesproje.firebaseauth.LoginScreenParts.FacebookLogin
-import com.enesproje.firebaseauth.LoginScreenParts.GoogleLogin
+import com.enesproje.firebaseauth.login_screen_components.FacebookLogin
+import com.enesproje.firebaseauth.login_screen_components.GoogleLogin
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
+import com.enesproje.firebaseauth.dialog_fragments.ForgottenPassword
 import com.enesproje.firebaseauth.login_screen_components.AnonymousLogin
 import com.facebook.CallbackManager
-import com.facebook.login.LoginManager
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.util.data.ProviderUtils
-import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -77,7 +67,7 @@ class LoginScreen : Fragment() {
 
         binding.tvForgotPassword.setOnClickListener {
 
-            ForgottenPassword().show(parentFragmentManager,"ForgottenPasswordFragment")
+            it.findNavController().navigate(LoginScreenDirections.actionLoginScreenToForgottenPassword())
 
         }
     }

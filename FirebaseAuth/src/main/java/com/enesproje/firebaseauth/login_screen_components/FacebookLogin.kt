@@ -1,4 +1,4 @@
-package com.enesproje.firebaseauth.LoginScreenParts
+package com.enesproje.firebaseauth.login_screen_components
 
 import android.util.Log
 import android.widget.Toast

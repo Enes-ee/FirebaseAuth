@@ -25,7 +25,11 @@
 
     //ForceUpdate
 
-    <string name="forceUpdateDialog">New version is available. Would you like to update? </string>
+    <string name="forceUpdateDialog">New version is available. \nWould you like to update? </string>
+
+    //QuitAccount
+
+    <string name="quitDialogText">You are quitting from your account.\nAre you sure?</string>
 
 
 </resources>

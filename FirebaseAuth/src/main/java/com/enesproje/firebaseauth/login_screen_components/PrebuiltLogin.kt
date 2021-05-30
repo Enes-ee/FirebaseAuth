@@ -1,4 +1,4 @@
-package com.enesproje.firebaseauth.LoginScreenParts
+package com.enesproje.firebaseauth.login_screen_components
 
 import android.app.Activity
 import android.content.Intent
