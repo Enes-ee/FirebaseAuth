@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.enesproje.firebaseauth.login_screen_components.FacebookLogin
 import com.enesproje.firebaseauth.login_screen_components.GoogleLogin
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
-import com.enesproje.firebaseauth.dialog_fragments.ForgottenPassword
 import com.enesproje.firebaseauth.login_screen_components.AnonymousLogin
 import com.facebook.CallbackManager
 import com.google.firebase.auth.ktx.auth

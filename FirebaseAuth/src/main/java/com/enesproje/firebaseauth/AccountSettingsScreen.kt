@@ -1,9 +1,6 @@
 package com.enesproje.firebaseauth
 
-
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,93 +10,147 @@ import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doAfterTextChanged
 import com.enesproje.firebaseauth.databinding.FragmentAccountSettingsScreenBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthProvider
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class AccountSettingsScreen : Fragment() {
 
-    var _binding : FragmentAccountSettingsScreenBinding? = null
-    val binding get() = _binding!!
+    private var _binding: FragmentAccountSettingsScreenBinding? = null
+    private val binding get() = _binding!!
 
     val TAG = "AccountSettings"
 
     val user = Firebase.auth.currentUser
 
-    var anyChanges = mutableMapOf("email" to false , "username" to false, "password" to false)
+    var anyChanges = mutableMapOf("email" to false, "username" to false, "password" to false)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    val database = Firebase.database.reference
 
-        _binding = FragmentAccountSettingsScreenBinding.inflate(inflater,container,false)
+    val userId = user!!.uid
 
-        initChangePasswordFields()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        _binding = FragmentAccountSettingsScreenBinding.inflate(inflater, container, false)
+
+        val editTextUsername = binding.settingsUsername
+        val editTextEmail = binding.settingsEmail
+        val editTextPassword = binding.settingsPassword
+        val editTextPassword2 = binding.settingsPassword2
+
+        initChangePasswordFields(editTextPassword, editTextPassword2)
 
         checkEmailVerification()
 
-        setInformation()
+        setInformation(editTextUsername, editTextUsername)
 
-        saveButtonVisibility()
+        val componentList = mutableListOf<EditText>(
+            editTextEmail,
+            editTextUsername,
+            editTextPassword,
+            editTextPassword2
+        )
 
-        saveChanges()
+        saveButtonVisibility(componentList)
+
+        saveChanges(editTextUsername, editTextEmail, editTextPassword, editTextPassword2)
 
 
         return binding.root
     }
 
 
+    private fun setInformation(editTextUsername: EditText, editTextEmail: EditText) {
 
-    private fun setInformation() {
+        editTextEmail.hint = user?.email
 
-        binding.settingsEmail.hint = user.email
+        val usernameListener = object : ValueEventListener {
 
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                binding.settingsUsername.hint = snapshot.value.toString()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+                Log.e(TAG, "Username catching failed.")
+
+            }
+
+        }
+
+        database.child("Users").child(userId).child("Username")
+            .addValueEventListener(usernameListener)
 
     }
 
-    private fun saveChanges() {
+    private fun saveChanges(
+        editTextUsername: EditText,
+        editTextEmail: EditText,
+        editTextPassword: EditText,
+        editTextPassword2: EditText
+    ) {
 
-        binding.buttonSave.setOnClickListener {
+        val buttonSave = binding.buttonSave
 
-            anyChanges = mutableMapOf("email" to false , "username" to false, "password" to false)
+        buttonSave.setOnClickListener {
 
-            emailConditions(binding.settingsEmail.text.toString())
-            usernameConditions(binding.settingsUsername.text.toString())
-            passwordConditions(binding.settingsPassword.text.toString(), binding.settingsPassword2.text.toString())
+            anyChanges = mutableMapOf("email" to false, "username" to false, "password" to false)
 
-            for (eachItem in anyChanges){
+            emailConditions(editTextEmail.text.toString())
+            usernameConditions(editTextUsername.text.toString())
+            passwordConditions(editTextPassword.text.toString(), editTextPassword2.text.toString())
 
-                if (eachItem.value == true){
+            for (eachItem in anyChanges) {
 
-                    when (eachItem.key){
+                if (eachItem.value == true) {
 
-                        "email" -> { user!!.updateEmail(binding.settingsEmail.text.toString())
+                    when (eachItem.key) {
+
+                        "email" -> {
+                            user!!.updateEmail(editTextEmail.text.toString())
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
-                                        setInformation()
+                                        setInformation(editTextUsername, editTextEmail)
                                         checkEmailVerification()
-                                        binding.settingsEmail.text.clear()
+                                        editTextEmail.text.clear()
                                         Log.e(TAG, "User email address updated.")
                                     }
-                                }}
+                                }
+                        }
 
-                        "username" -> {}
+                        "username" -> {
+                            database.child("Users").child(userId).child("Username")
+                                .setValue(editTextUsername.text.toString())
+                            editTextUsername.text.clear()
+                        }
 
-                        "password" -> {user!!.updatePassword(binding.settingsPassword.text.toString())
+                        "password" -> {
+                            user!!.updatePassword(editTextPassword.text.toString())
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
+                                        val buttonChangePassword = binding.buttonChangePassword
                                         Log.e(TAG, "User password updated.")
-                                        binding.settingsPassword.visibility = View.GONE
-                                        binding.settingsPassword2.visibility = View.GONE
-                                        binding.buttonChangePassword.visibility = View.GONE
+                                        editTextPassword.visibility = View.GONE
+                                        editTextPassword2.visibility = View.GONE
+                                        buttonChangePassword.visibility = View.GONE
                                     }
-                                }}
+                                }
+                        }
 
                     }
 
-                    Toast.makeText(this.context,"Changes have been saved.",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.context, "Changes have been saved.", Toast.LENGTH_SHORT)
+                        .show()
 
                 }
 
@@ -110,34 +161,43 @@ class AccountSettingsScreen : Fragment() {
 
     }
 
-    private fun emailConditions(newEmail: String){
+    private fun emailConditions(newEmail: String) {
 
-        if (!newEmail.isNullOrEmpty()) {
+        if (!newEmail.isEmpty()) {
 
             val regex = Regex(""".+@\w+\.\w+""")
             val sonuc = regex.matchEntire(newEmail)
             if (!sonuc?.value.isNullOrEmpty()) {
                 anyChanges["email"] = true
             } else {
-                Toast.makeText(this.context, "Entered e-mail adress does not meet requirements", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this.context,
+                    "Entered e-mail adress does not meet requirements",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
     }
 
 
+    private fun usernameConditions(newUsername: String) {
 
-
-    private fun usernameConditions(newUsername: String){
-
-        if (newUsername.length >= 3)
+        if (newUsername.length >= 4) {
             anyChanges["username"] = true
+        } else {
+            Toast.makeText(
+                this.context,
+                "Entered username does not meet requirements",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
     }
 
     private fun passwordConditions(newPassword: String, newPassword2: String) {
 
-        if (!newPassword.isNullOrEmpty()) {
+        if (!newPassword.isEmpty()) {
 
             var stage: Int = 1
 
@@ -146,11 +206,19 @@ class AccountSettingsScreen : Fragment() {
                 when (stage) {
 
                     1 -> if (newPassword.length >= 6) stage++ else {
-                        Toast.makeText(this.context, "Password length is less than 6 characters", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this.context,
+                            "Password length is less than 6 characters",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         break
                     }
                     2 -> if (newPassword == newPassword2) stage++ else {
-                        Toast.makeText(this.context, "Entered passwords do not match", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this.context,
+                            "Entered passwords do not match",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         break
                     }
                 }
@@ -163,46 +231,53 @@ class AccountSettingsScreen : Fragment() {
     }
 
 
-    private fun initChangePasswordFields() {
+    private fun initChangePasswordFields(editTextPassword: EditText, editTextPassword2: EditText) {
 
-        val animPassword = AnimationUtils.loadAnimation(this.context,R.anim.fade_in)
+        val animPassword = AnimationUtils.loadAnimation(this.context, R.anim.fade_in_layout)
 
-        val animButtonChangePassword = AnimationUtils.loadAnimation(this.context,R.anim.fade_out)
+        val animButtonChangePassword =
+            AnimationUtils.loadAnimation(this.context, R.anim.fade_out_layout)
 
-        binding.buttonChangePassword.setOnClickListener {
+        val buttonChangePassword = binding.buttonChangePassword
+
+        buttonChangePassword.setOnClickListener {
 
             it.visibility = View.GONE
 
             it.startAnimation(animButtonChangePassword)
 
-            binding.settingsPassword.visibility = View.VISIBLE
+            editTextPassword.visibility = View.VISIBLE
 
-            binding.settingsPassword.startAnimation(animPassword)
+            editTextPassword.startAnimation(animPassword)
 
-            binding.settingsPassword2.visibility = View.VISIBLE
+            editTextPassword2.visibility = View.VISIBLE
 
-            binding.settingsPassword2.startAnimation(animPassword)
+            editTextPassword2.startAnimation(animPassword)
 
         }
 
     }
 
-    private fun saveButtonVisibility(){
+    private fun saveButtonVisibility(componentList: MutableList<EditText>) {
 
-        val componentList = mutableListOf<EditText>(binding.settingsEmail , binding.settingsUsername , binding.settingsPassword , binding.settingsPassword2)
 
-        for (eachComponent in componentList){
+        val buttonSave = binding.buttonSave
+
+        for (eachComponent in componentList) {
 
             eachComponent.addTextChangedListener {
 
                 if (eachComponent.text.toString().length == 1) {
 
-                    binding.buttonSave.visibility = View.VISIBLE
+                    buttonSave.visibility = View.VISIBLE
+
+                    val animation = AnimationUtils.loadAnimation(this.context, R.anim.fade_in)
+                    buttonSave.startAnimation(animation)
 
 
                 } else if (eachComponent.text.isNullOrEmpty()) {
 
-                    binding.buttonSave.visibility = View.GONE
+                    buttonSave.visibility = View.GONE
 
                 }
 
@@ -215,16 +290,19 @@ class AccountSettingsScreen : Fragment() {
     private fun checkEmailVerification() {
 
 
-        if (!user.email.isNullOrEmpty()) {
+        if (!user!!.email.isNullOrEmpty()) {
 
             val isEmailVerified = user.isEmailVerified
 
             if (!isEmailVerified) {
 
-                binding.buttonVerifyEmail.visibility = View.VISIBLE
-                binding.tvVerifyEmail.visibility = View.VISIBLE
+                val buttonVerifyEmail = binding.buttonVerifyEmail
+                val tvVerifyEmail = binding.tvVerifyEmail
 
-                binding.buttonVerifyEmail.setOnClickListener {
+                buttonVerifyEmail.visibility = View.VISIBLE
+                tvVerifyEmail.visibility = View.VISIBLE
+
+                tvVerifyEmail.setOnClickListener {
 
                     verifyEmail()
 
@@ -239,12 +317,16 @@ class AccountSettingsScreen : Fragment() {
     private fun verifyEmail() {
 
         user!!.sendEmailVerification()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.e(TAG, "Verification email sent.")
-                        Toast.makeText(this.context,"A verification e-mail has been sent to your e-mail box.",Toast.LENGTH_SHORT).show()
-                    }
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.e(TAG, "Verification email sent.")
+                    Toast.makeText(
+                        this.context,
+                        "A verification e-mail has been sent to your e-mail box.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+            }
 
     }
 

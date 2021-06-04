@@ -47,7 +47,7 @@ class TempMainScreen : Fragment() {
 
         }
 
-        if (auth.currentUser.isAnonymous) {
+        if (auth.currentUser!!.isAnonymous) {
 
             binding.tvLoginType.text = getString(R.string.anonymous_authentication)
 

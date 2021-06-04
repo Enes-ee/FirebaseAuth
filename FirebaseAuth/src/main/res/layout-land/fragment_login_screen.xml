@@ -13,8 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        tools:layout_editor_absoluteX="366dp"
-        tools:layout_editor_absoluteY="130dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/facebookLoginButton"
+        app:layout_constraintEnd_toEndOf="@+id/facebookLoginButton"
+        app:layout_constraintStart_toStartOf="@+id/facebookLoginButton"
+        app:layout_constraintTop_toTopOf="@+id/facebookLoginButton" />
 
     <TextView
         android:id="@+id/tvCreateAccount"
