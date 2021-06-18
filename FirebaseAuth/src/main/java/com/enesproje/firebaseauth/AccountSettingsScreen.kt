@@ -1,15 +1,27 @@
 package com.enesproje.firebaseauth
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.enesproje.firebaseauth.databinding.FragmentAccountSettingsScreenBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -17,6 +29,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.*
+import java.io.*
 
 class AccountSettingsScreen : Fragment() {
 
@@ -50,7 +64,7 @@ class AccountSettingsScreen : Fragment() {
 
         checkEmailVerification()
 
-        setInformation(editTextUsername, editTextUsername)
+        setInformation(editTextUsername, editTextEmail)
 
         val componentList = mutableListOf<EditText>(
             editTextEmail,
@@ -61,10 +75,105 @@ class AccountSettingsScreen : Fragment() {
 
         saveButtonVisibility(componentList)
 
+        pickProfilePicture()
+
+        setProfilePicture()
+
         saveChanges(editTextUsername, editTextEmail, editTextPassword, editTextPassword2)
 
 
         return binding.root
+    }
+
+    private fun setProfilePicture() {
+
+        val imagePath = requireContext().getDir("profilePictures",Context.MODE_PRIVATE).absolutePath
+
+        loadProfilePictureFromStorage(imagePath)
+
+
+    }
+
+    private fun pickProfilePicture() {
+
+        val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
+
+            if (it != null) {
+
+                Glide.with(this)
+                    .load(it)
+                    .transform(MultiTransformation(CenterCrop(), RoundedCorners(100)))
+                    .into(binding.buttonProfilePicture!!)
+
+
+                MainScope().launch {
+
+                    withContext(Dispatchers.IO) {
+
+                        val bitmapImage =
+                            Glide.with(requireContext()).asBitmap().load(it).submit().get()
+
+                        saveProfilePictureToInternalStorage(bitmapImage)
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        binding.buttonProfilePicture!!.setOnClickListener {
+
+            getContent.launch("image/*")
+
+        }
+
+    }
+
+
+
+
+    private fun saveProfilePictureToInternalStorage(bitmapImage: Bitmap) : String{
+        // path to /data/data/yourapp/app_data/imageDir
+        val directory = requireContext().getDir("profilePictures", Context.MODE_PRIVATE)
+        // Create imageDir
+        val mypath = File(directory, "profilePicture_$userId.jpg")
+        var fos: FileOutputStream? = null
+        try {
+            fos = FileOutputStream(mypath)
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            try {
+                fos!!.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        return directory.absolutePath
+
+    }
+
+    private fun loadProfilePictureFromStorage(path: String) {
+        try {
+            val f = File(path, "profilePicture_$userId.jpg")
+            val b = BitmapFactory.decodeStream(FileInputStream(f))
+            val img = binding.buttonProfilePicture as ImageButton
+
+            Glide.with(this)
+                .asBitmap()
+                .load(b)
+                .transform(MultiTransformation(CenterCrop(),RoundedCorners(100)))
+                .into(img)
+
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
     }
 
 
@@ -112,7 +221,7 @@ class AccountSettingsScreen : Fragment() {
 
             for (eachItem in anyChanges) {
 
-                if (eachItem.value == true) {
+                if (eachItem.value) {
 
                     when (eachItem.key) {
 
@@ -158,7 +267,6 @@ class AccountSettingsScreen : Fragment() {
 
         }
 
-
     }
 
     private fun emailConditions(newEmail: String) {
@@ -201,7 +309,7 @@ class AccountSettingsScreen : Fragment() {
 
             var stage: Int = 1
 
-            while (stage < 3) {
+            loop@ while (stage < 3) {
 
                 when (stage) {
 
@@ -211,7 +319,7 @@ class AccountSettingsScreen : Fragment() {
                             "Password length is less than 6 characters",
                             Toast.LENGTH_SHORT
                         ).show()
-                        break
+                        break@loop
                     }
                     2 -> if (newPassword == newPassword2) stage++ else {
                         Toast.makeText(
@@ -219,7 +327,7 @@ class AccountSettingsScreen : Fragment() {
                             "Entered passwords do not match",
                             Toast.LENGTH_SHORT
                         ).show()
-                        break
+                        break@loop
                     }
                 }
             }
@@ -335,4 +443,7 @@ class AccountSettingsScreen : Fragment() {
         _binding = null
     }
 
+
 }
+
+

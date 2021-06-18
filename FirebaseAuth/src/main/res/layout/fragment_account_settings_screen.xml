@@ -35,13 +35,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
                 app:cardBackgroundColor="#33FFFFFF"
                 app:cardElevation="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView6">
+                app:layout_constraintTop_toBottomOf="@+id/buttonProfilePicture">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -236,15 +236,27 @@
 
             <Button
                 android:id="@+id/buttonSave"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
                 android:background="@drawable/ee_button"
                 android:text="SAVE"
                 android:textColor="#FFFFFF"
                 android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/cardView"
-                app:layout_constraintEnd_toEndOf="@+id/cardView" />
+                app:layout_constraintBottom_toBottomOf="@+id/buttonProfilePicture"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/buttonProfilePicture"
+                tools:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/buttonProfilePicture"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/default_profile_picture"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
