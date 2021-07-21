@@ -36,13 +36,14 @@ import java.io.*
 class AccountSettingsScreen : Fragment() {
 
     private var _binding: FragmentAccountSettingsScreenBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     val TAG = "AccountSettings"
 
     val user = Firebase.auth.currentUser
 
-    var anyChanges = mutableMapOf("email" to false, "username" to false, "password" to false)
+    var anyChanges : MutableMap<String,Any> = mutableMapOf("email" to false, "username" to false, "password" to false, "profilePicture" to true)
+    lateinit var profilePicture : ProfilePicture
 
     val database = Firebase.database.reference
 
@@ -76,7 +77,7 @@ class AccountSettingsScreen : Fragment() {
 
         saveButtonVisibility(componentList)
 
-        ProfilePicture(this,binding)
+        profilePicture = ProfilePicture(this,binding)
 
         saveChanges(editTextUsername, editTextEmail, editTextPassword, editTextPassword2)
 
@@ -122,7 +123,9 @@ class AccountSettingsScreen : Fragment() {
 
         buttonSave.setOnClickListener {
 
-            anyChanges = mutableMapOf("email" to false, "username" to false, "password" to false)
+            if (anyChanges["profilePicture"] == true) profilePicture.saveProfilePictureBackground()
+
+            anyChanges = mutableMapOf("email" to false, "username" to false, "password" to false, "profilePicture" to false)
 
             emailConditions(editTextEmail.text.toString())
             usernameConditions(editTextUsername.text.toString())
@@ -130,7 +133,7 @@ class AccountSettingsScreen : Fragment() {
 
             for (eachItem in anyChanges) {
 
-                if (eachItem.value) {
+                if (eachItem.value == true) {
 
                     when (eachItem.key) {
 
@@ -150,6 +153,7 @@ class AccountSettingsScreen : Fragment() {
                             database.child("Users").child(userId).child("Username")
                                 .setValue(editTextUsername.text.toString())
                             editTextUsername.text.clear()
+                            Log.e(TAG, "Username updated.")
                         }
 
                         "password" -> {
@@ -160,15 +164,28 @@ class AccountSettingsScreen : Fragment() {
                                         Log.e(TAG, "User password updated.")
                                         editTextPassword.visibility = View.GONE
                                         editTextPassword2.visibility = View.GONE
-                                        buttonChangePassword.visibility = View.GONE
+                                        buttonChangePassword.visibility = View.VISIBLE
                                     }
+                                }
+                                .addOnFailureListener {
+
+                                    Log.e(TAG,it.toString())
+
                                 }
                         }
 
                     }
 
+                    Log.e(TAG,"Changes : " + anyChanges.toString())
+
                     Toast.makeText(this.context, "Changes have been saved.", Toast.LENGTH_SHORT)
                         .show()
+
+                }
+
+                else if (eachItem.value == "error") {
+
+                    break
 
                 }
 
@@ -187,6 +204,7 @@ class AccountSettingsScreen : Fragment() {
             if (!sonuc?.value.isNullOrEmpty()) {
                 anyChanges["email"] = true
             } else {
+                anyChanges["email"] = "error"
                 Toast.makeText(
                     this.context,
                     "Entered e-mail adress does not meet requirements",
@@ -200,14 +218,19 @@ class AccountSettingsScreen : Fragment() {
 
     private fun usernameConditions(newUsername: String) {
 
-        if (newUsername.length >= 4) {
-            anyChanges["username"] = true
-        } else {
-            Toast.makeText(
-                this.context,
-                "Entered username does not meet requirements",
-                Toast.LENGTH_SHORT
-            ).show()
+        if (!newUsername.isEmpty()) {
+
+            if (newUsername.length >= 4) {
+                anyChanges["username"] = true
+            } else {
+                anyChanges["username"] = "error"
+                Toast.makeText(
+                    this.context,
+                    "Entered username does not meet requirements",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
 
     }
@@ -243,6 +266,8 @@ class AccountSettingsScreen : Fragment() {
 
             if (stage == 3) {
                 anyChanges["password"] = true
+            }else{
+                anyChanges["password"] = "error"
             }
         }
     }
@@ -286,7 +311,7 @@ class AccountSettingsScreen : Fragment() {
 
                     makeSaveButtonVisible()
 
-                } else if (eachComponent.text.isNullOrEmpty()) {
+                } else if (eachComponent.text.isNullOrEmpty() && anyChanges["profilePicture"] == false) {
 
                     makeSaveButtonGone()
 
