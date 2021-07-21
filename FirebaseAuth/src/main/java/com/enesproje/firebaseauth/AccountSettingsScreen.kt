@@ -23,6 +23,7 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.enesproje.firebaseauth.databinding.FragmentAccountSettingsScreenBinding
+import com.enesproje.firebaseauth.mechanics.ProfilePicture
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -75,106 +76,14 @@ class AccountSettingsScreen : Fragment() {
 
         saveButtonVisibility(componentList)
 
-        pickProfilePicture()
-
-        setProfilePicture()
+        ProfilePicture(this,binding)
 
         saveChanges(editTextUsername, editTextEmail, editTextPassword, editTextPassword2)
-
 
         return binding.root
     }
 
-    private fun setProfilePicture() {
 
-        val imagePath = requireContext().getDir("profilePictures",Context.MODE_PRIVATE).absolutePath
-
-        loadProfilePictureFromStorage(imagePath)
-
-
-    }
-
-    private fun pickProfilePicture() {
-
-        val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
-
-            if (it != null) {
-
-                Glide.with(this)
-                    .load(it)
-                    .transform(MultiTransformation(CenterCrop(), RoundedCorners(100)))
-                    .into(binding.buttonProfilePicture!!)
-
-
-                MainScope().launch {
-
-                    withContext(Dispatchers.IO) {
-
-                        val bitmapImage =
-                            Glide.with(requireContext()).asBitmap().load(it).submit().get()
-
-                        saveProfilePictureToInternalStorage(bitmapImage)
-
-                    }
-
-                }
-
-            }
-
-        }
-
-        binding.buttonProfilePicture!!.setOnClickListener {
-
-            getContent.launch("image/*")
-
-        }
-
-    }
-
-
-
-
-    private fun saveProfilePictureToInternalStorage(bitmapImage: Bitmap) : String{
-        // path to /data/data/yourapp/app_data/imageDir
-        val directory = requireContext().getDir("profilePictures", Context.MODE_PRIVATE)
-        // Create imageDir
-        val mypath = File(directory, "profilePicture_$userId.jpg")
-        var fos: FileOutputStream? = null
-        try {
-            fos = FileOutputStream(mypath)
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos)
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            try {
-                fos!!.close()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-
-        return directory.absolutePath
-
-    }
-
-    private fun loadProfilePictureFromStorage(path: String) {
-        try {
-            val f = File(path, "profilePicture_$userId.jpg")
-            val b = BitmapFactory.decodeStream(FileInputStream(f))
-            val img = binding.buttonProfilePicture as ImageButton
-
-            Glide.with(this)
-                .asBitmap()
-                .load(b)
-                .transform(MultiTransformation(CenterCrop(),RoundedCorners(100)))
-                .into(img)
-
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        }
-    }
 
 
     private fun setInformation(editTextUsername: EditText, editTextEmail: EditText) {
@@ -369,29 +278,45 @@ class AccountSettingsScreen : Fragment() {
     private fun saveButtonVisibility(componentList: MutableList<EditText>) {
 
 
-        val buttonSave = binding.buttonSave
-
         for (eachComponent in componentList) {
 
             eachComponent.addTextChangedListener {
 
                 if (eachComponent.text.toString().length == 1) {
 
-                    buttonSave.visibility = View.VISIBLE
-
-                    val animation = AnimationUtils.loadAnimation(this.context, R.anim.fade_in)
-                    buttonSave.startAnimation(animation)
-
+                    makeSaveButtonVisible()
 
                 } else if (eachComponent.text.isNullOrEmpty()) {
 
-                    buttonSave.visibility = View.GONE
+                    makeSaveButtonGone()
 
                 }
 
             }
 
         }
+
+    }
+
+    fun makeSaveButtonVisible() {
+
+        val buttonSave = binding.buttonSave
+
+        buttonSave.visibility = View.VISIBLE
+
+        val animation = AnimationUtils.loadAnimation(this.context, R.anim.fade_in)
+        buttonSave.startAnimation(animation)
+
+    }
+
+    fun makeSaveButtonGone() {
+
+        val buttonSave = binding.buttonSave
+
+        buttonSave.visibility = View.GONE
+
+        val animation = AnimationUtils.loadAnimation(this.context, R.anim.fade_out)
+        buttonSave.startAnimation(animation)
 
     }
 
