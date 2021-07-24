@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_tempMainScreen_to_quitAccount"
             app:destination="@id/quitAccount" />
+        <action
+            android:id="@+id/action_tempMainScreen_to_createAccount"
+            app:destination="@id/createAccount" />
     </fragment>
     <dialog
         android:id="@+id/emailLogin"
@@ -113,4 +116,13 @@
             app:popUpTo="@id/quitAccount"
             app:popUpToInclusive="true" />
     </dialog>
+    <fragment
+        android:id="@+id/createAccount"
+        android:name="com.enesproje.firebaseauth.dialog_fragments.CreateAccount"
+        android:label="fragment_create_account"
+        tools:layout="@layout/fragment_create_account" >
+        <action
+            android:id="@+id/action_createAccount_to_emailRegisterScreen"
+            app:destination="@id/emailRegisterScreen" />
+    </fragment>
 </navigation>

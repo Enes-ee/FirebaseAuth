@@ -47,6 +47,12 @@ class TempMainScreen : Fragment() {
 
         }
 
+        binding.buttonCreateAccount!!.setOnClickListener {
+
+            this.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToCreateAccount())
+
+        }
+
         if (auth.currentUser!!.isAnonymous) {
 
             binding.tvLoginType.text = getString(R.string.anonymous_authentication)

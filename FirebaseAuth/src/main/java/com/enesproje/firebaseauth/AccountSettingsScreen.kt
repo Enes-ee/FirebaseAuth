@@ -42,7 +42,7 @@ class AccountSettingsScreen : Fragment() {
 
     val user = Firebase.auth.currentUser
 
-    var anyChanges : MutableMap<String,Any> = mutableMapOf("email" to false, "username" to false, "password" to false, "profilePicture" to true)
+    var anyChanges : MutableMap<String,Any> = mutableMapOf("email" to false, "username" to false, "password" to false, "profilePicture" to false)
     lateinit var profilePicture : ProfilePicture
 
     val database = Firebase.database.reference
@@ -82,6 +82,7 @@ class AccountSettingsScreen : Fragment() {
         saveChanges(editTextUsername, editTextEmail, editTextPassword, editTextPassword2)
 
         return binding.root
+
     }
 
 
@@ -391,6 +392,12 @@ class AccountSettingsScreen : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        Log.e(TAG,"DESTROY")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e(TAG,"STOP")
     }
 
 

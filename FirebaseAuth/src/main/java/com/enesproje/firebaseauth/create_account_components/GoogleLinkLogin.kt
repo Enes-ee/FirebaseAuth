@@ -1,30 +1,28 @@
-package com.enesproje.firebaseauth.login_screen_components
+package com.enesproje.firebaseauth.create_account_components
 
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
-import com.enesproje.firebaseauth.LoginScreen
 import com.enesproje.firebaseauth.R
 import com.enesproje.firebaseauth.databinding.FragmentCreateAccountBinding
-import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 
 import com.google.firebase.ktx.Firebase
 
 
-class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBinding){
+class GoogleLinkLogin(val fragment: Fragment, val binding: FragmentCreateAccountBinding){
 
     val auth = Firebase.auth
     val gso : GoogleSignInOptions
     val mGoogleSignInClient : GoogleSignInClient
-    private val TAG = "GoogleLogin"
+    private val TAG = "GoogleLinkLogin"
 
 
     init {
@@ -42,7 +40,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
 
     fun initGoogleLogin(){
 
-        binding.googleLoginButton.setOnClickListener {
+        binding.googleLoginButton2.setOnClickListener {
 
             signIn()
 
@@ -55,29 +53,43 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
     }
 
 
-    fun firebaseAuthWithGoogle(idToken: String) {
+    fun firebaseLinkToAccount(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
-                .addOnCompleteListener(fragment.requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.e(TAG, "signInWithCredential:success")
-                        //updateUI(user)
-                        (fragment as LoginScreen).successfulLoginNavigation()
 
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.e(TAG, "signInWithCredential:failure", task.exception)
-                        // ...
-                        Snackbar.make(
-                            fragment.requireView(),
-                            "Authentication Failed.",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                        //updateUI(null)
-                    }
-                    // ...
+        auth.currentUser!!.linkWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.e(TAG, "linkWithCredential:success")
+                    val user = task.result?.user
+
+                } else {
+                    Log.e(TAG, "linkWithCredential:failure", task.exception)
+                    firebaseSignIn(credential)
+
                 }
+
+            }
+    }
+
+    fun firebaseSignIn(credential : AuthCredential){
+
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(fragment.requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.e(TAG, "signInWithCredential:success")
+                    Toast.makeText(fragment.requireContext(), """This google account has already linked with a user , 
+                        |Original account has been loaded""".trimMargin(),
+                        Toast.LENGTH_SHORT).show()
+                    //updateUI(user)
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.e(TAG, "signInWithCredential:failure", task.exception)
+                    //updateUI(null)
+                }
+                // ...
+            }
     }
 
     fun googleLoginCallBack(requestCode : Int, data : Intent?){
@@ -88,7 +100,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 Log.e(TAG, "firebaseAuthWithGoogle:" + account.id)
-                firebaseAuthWithGoogle(account.idToken!!)
+                firebaseLinkToAccount(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.e(TAG, "Google sign in failed", e)
@@ -97,5 +109,6 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
         }
 
     }
+
 
 }

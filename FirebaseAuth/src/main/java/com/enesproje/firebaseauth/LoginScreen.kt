@@ -22,11 +22,10 @@ class LoginScreen : Fragment() {
     private var _binding : FragmentLoginScreenBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var callbackManager : CallbackManager
-//    private lateinit var prebuiltLogin : PrebuiltLogin
-
     private val user = Firebase.auth.currentUser
 
+    private lateinit var callbackManager : CallbackManager
+    //    private lateinit var prebuiltLogin : PrebuiltLogin
     private lateinit var googleLogin : GoogleLogin
     private lateinit var facebookLogin : FacebookLogin
     private lateinit var anonymousLogin: AnonymousLogin

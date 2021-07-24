@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ee_background"
+    tools:context=".dialog_fragments.CreateAccount">
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebookButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/facebookLoginButton2"
+        app:layout_constraintEnd_toEndOf="@+id/facebookLoginButton2"
+        app:layout_constraintStart_toStartOf="@+id/facebookLoginButton2"
+        app:layout_constraintTop_toTopOf="@+id/facebookLoginButton2" />
+
+    <Button
+        android:id="@+id/emailLoginButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/ee_email_button_ripple"
+        android:gravity="start|center_vertical"
+        android:paddingStart="70dp"
+        android:text="@string/sign_up_by_email"
+        android:textAllCaps="false"
+        android:textColor="#D9FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/facebookLoginButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ee_facebook_button_ripple"
+        android:gravity="start|center_vertical"
+        android:paddingStart="70dp"
+        android:text="@string/sign_in_by_facebook"
+        android:textAllCaps="false"
+        android:textColor="#D9FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/emailLoginButton2"
+        app:layout_constraintEnd_toEndOf="@+id/emailLoginButton2"
+        app:layout_constraintStart_toStartOf="@+id/emailLoginButton2" />
+
+    <Button
+        android:id="@+id/googleLoginButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ee_google_button_ripple"
+        android:gravity="start|center_vertical"
+        android:paddingStart="70dp"
+        android:text="@string/sign_in_by_google"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/facebookLoginButton2"
+        app:layout_constraintEnd_toEndOf="@+id/emailLoginButton2"
+        app:layout_constraintStart_toStartOf="@+id/emailLoginButton2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

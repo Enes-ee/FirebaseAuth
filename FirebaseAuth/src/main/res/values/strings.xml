@@ -10,7 +10,7 @@
 
     //Login Buttons
     <string name="sign_in_by_google">Sign-in with Google</string>
-    <string name="sign_in_by_e_mail">Sign-in with E-mail</string>
+    <string name="sign_in_by_email">Sign-in with E-mail</string>
     <string name="sign_in_by_facebook">Sign-in with Facebook</string>
     <string name="sign_in_anonymous">Sign-in Anonymous</string>
     <string name="create_a_new_account">Create a new account</string>
@@ -30,6 +30,10 @@
     //QuitAccount
 
     <string name="quitDialogText">You are quitting from your account.\nAre you sure?</string>
+
+    //CreateAccount
+
+    <string name="sign_up_by_email">Sign-up with E-mail</string>
 
 
 </resources>
