@@ -24,7 +24,7 @@ import java.io.*
 
 class ProfilePicture (val fragment : AccountSettingsScreen , val binding : FragmentAccountSettingsScreenBinding){
 
-    val TAG = "ProfilePicture"
+    val TAG = "InfoEE_ProfilePicture"
 
     var userId = Firebase.auth.currentUser!!.uid
     val storage = Firebase.storage

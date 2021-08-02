@@ -10,17 +10,17 @@
 
     <Button
         android:id="@+id/buttonUpdate"
+        style="@style/button"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@drawable/ee_button"
         android:text="UPDATE"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/buttonLeave" />
 
     <Button
         android:id="@+id/buttonLeave"
+        style="@style/button"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -28,8 +28,6 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/ee_button"
         android:text="LEAVE"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonUpdate"
         app:layout_constraintHorizontal_bias="0.0"

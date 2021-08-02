@@ -18,7 +18,7 @@ class EmailRegisterScreen : Fragment() {
     private var _binding : FragmentEmailRegisterScreenBinding? = null
     private val binding get() = _binding!!
     private var auth = Firebase.auth
-    private var TAG = "REGISTER"
+    private var TAG = "InfoEE_EmailRegisterScreen"
 
 
     override fun onCreateView(

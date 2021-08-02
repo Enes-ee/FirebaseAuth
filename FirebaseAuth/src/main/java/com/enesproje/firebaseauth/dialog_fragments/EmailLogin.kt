@@ -23,7 +23,7 @@ import com.google.firebase.ktx.Firebase
 
 class EmailLogin : DialogFragment() {
 
-    private val TAG = "EmailLogin"
+    private val TAG = "InfoEE_EmailLogin"
     private var auth = Firebase.auth
     private var _binding : FragmentEmailLoginBinding? = null
     private val binding get() = _binding!!

@@ -9,6 +9,7 @@
 
     <EditText
         android:id="@+id/loginEmail"
+        style="@style/editText"
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
@@ -21,15 +22,13 @@
         android:paddingStart="30dp"
         android:paddingEnd="15dp"
         android:singleLine="true"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/ee_hint_color"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/loginPassword"
+        style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -40,9 +39,6 @@
         android:paddingStart="30dp"
         android:paddingEnd="15dp"
         android:singleLine="true"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/ee_hint_color"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/loginEmail"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/loginEmail"
@@ -50,6 +46,7 @@
 
     <Button
         android:id="@+id/login_button"
+        style="@style/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
@@ -59,8 +56,6 @@
         android:background="@drawable/ee_button"
         android:fontFamily="sans-serif-medium"
         android:text="LOGIN"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/loginEmail"
         app:layout_constraintStart_toStartOf="@+id/loginEmail"

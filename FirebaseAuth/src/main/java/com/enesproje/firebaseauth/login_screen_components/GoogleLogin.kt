@@ -24,7 +24,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
     val auth = Firebase.auth
     val gso : GoogleSignInOptions
     val mGoogleSignInClient : GoogleSignInClient
-    private val TAG = "GoogleLogin"
+    private val TAG = "InfoEE_GoogleLogin"
 
 
     init {

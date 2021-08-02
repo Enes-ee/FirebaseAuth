@@ -16,7 +16,7 @@ import com.google.firebase.ktx.Firebase
 
 class FacebookLinkLogin(var fragment : Fragment, var binding : FragmentCreateAccountBinding) {
 
-    private val TAG = "FacebookLinkLogin"
+    private val TAG = "InfoEE_FacebookLinkLogin"
     private var auth = Firebase.auth
 
         fun build(callbackManager: CallbackManager){

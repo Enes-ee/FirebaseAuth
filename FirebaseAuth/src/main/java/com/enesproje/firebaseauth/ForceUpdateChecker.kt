@@ -22,6 +22,8 @@ import java.util.HashMap
 
 class ForceUpdateChecker (val activity : Activity , val fragment: Fragment){
 
+    val TAG = "InfoEE_ForceUpdate"
+
     fun check(){
 
         val remoteConfig = Firebase.remoteConfig
@@ -31,7 +33,7 @@ class ForceUpdateChecker (val activity : Activity , val fragment: Fragment){
             val currentVersion = remoteConfig.getString("force_update_current_version")
             val appVersion = getAppVersion(activity)
 
-            Log.e("VERSION","Current : $currentVersion, App : $appVersion")
+            Log.e(TAG,"Current : $currentVersion, App : $appVersion")
             val updateUrl = remoteConfig.getString(("force_update_store_url"))
 
             if(currentVersion != appVersion){
@@ -68,7 +70,7 @@ class ForceUpdateChecker (val activity : Activity , val fragment: Fragment){
 
                             check()
 
-                            Log.e("ForceUpdateChecker","${fragment.findNavController().currentDestination!!.label}")
+                            Log.e(TAG,"${fragment.findNavController().currentDestination!!.label}")
 
                         }
 
@@ -87,7 +89,7 @@ class ForceUpdateChecker (val activity : Activity , val fragment: Fragment){
             result = result.replace("[a-zA-Z]|-".toRegex(), "")
         }catch(e: PackageManager.NameNotFoundException){
 
-            Log.e("Force Update","Exception aldın. ForceUpdateChecker -> getAppVersion")
+            Log.e(TAG,"Exception aldın. ForceUpdateChecker -> getAppVersion")
 
         }
 

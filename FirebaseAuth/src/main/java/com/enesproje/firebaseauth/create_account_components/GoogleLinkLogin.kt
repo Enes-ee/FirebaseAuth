@@ -22,7 +22,7 @@ class GoogleLinkLogin(val fragment: Fragment, val binding: FragmentCreateAccount
     val auth = Firebase.auth
     val gso : GoogleSignInOptions
     val mGoogleSignInClient : GoogleSignInClient
-    private val TAG = "GoogleLinkLogin"
+    private val TAG = "InfoEE_GoogleLinkLogin"
 
 
     init {

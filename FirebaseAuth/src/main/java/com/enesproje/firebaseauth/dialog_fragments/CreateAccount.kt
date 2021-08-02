@@ -18,7 +18,7 @@ class CreateAccount : Fragment(){
     var _binding : FragmentCreateAccountBinding? = null
     val binding get() = _binding!!
 
-    val TAG = "CreateAccount"
+    val TAG = "InfoEE_CreateAccount"
 
     private lateinit var callbackManager : CallbackManager
     private lateinit var googleLinkLogin : GoogleLinkLogin

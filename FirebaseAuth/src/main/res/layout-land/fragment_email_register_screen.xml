@@ -9,6 +9,7 @@
 
     <EditText
         android:id="@+id/registerEmail"
+        style="@style/editText"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
@@ -21,15 +22,13 @@
         android:paddingStart="30dp"
         android:paddingEnd="15dp"
         android:singleLine="true"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#1AA4E3"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/registerPassword"
+        style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -40,9 +39,6 @@
         android:paddingStart="30dp"
         android:paddingEnd="15dp"
         android:singleLine="true"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/ee_hint_color"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/registerEmail"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/registerEmail"
@@ -50,6 +46,7 @@
 
     <EditText
         android:id="@+id/registerPassword2"
+        style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
@@ -60,9 +57,6 @@
         android:paddingStart="30dp"
         android:paddingEnd="15dp"
         android:singleLine="true"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/ee_hint_color"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/registerPassword"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/registerPassword"
@@ -70,6 +64,7 @@
 
     <Button
         android:id="@+id/submit"
+        style="@style/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -78,8 +73,6 @@
         android:background="@drawable/ee_button"
         android:fontFamily="sans-serif-medium"
         android:text="SUBMIT"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/registerPassword2"
         app:layout_constraintHorizontal_bias="1.0"

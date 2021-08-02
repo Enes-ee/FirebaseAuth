@@ -38,7 +38,7 @@ class AccountSettingsScreen : Fragment() {
     private var _binding: FragmentAccountSettingsScreenBinding? = null
     val binding get() = _binding!!
 
-    val TAG = "AccountSettings"
+    val TAG = "InfoEE_AccountSettings"
 
     val user = Firebase.auth.currentUser
 

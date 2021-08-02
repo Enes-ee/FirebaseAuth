@@ -60,6 +60,7 @@
 
                     <EditText
                         android:id="@+id/settingsUsername"
+                        style="@style/editTextUpdateble"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="25dp"
@@ -69,9 +70,7 @@
                         android:paddingStart="30dp"
                         android:paddingEnd="15dp"
                         android:singleLine="true"
-                        android:textColor="#FFEB3B"
                         android:textColorHint="#FFFFFF"
-                        android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.516"
                         app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +78,7 @@
 
                     <EditText
                         android:id="@+id/settingsEmail"
+                        style="@style/editTextUpdateble"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="25dp"
@@ -90,9 +90,7 @@
                         android:paddingStart="30dp"
                         android:paddingEnd="15dp"
                         android:singleLine="true"
-                        android:textColor="#FFEB3B"
                         android:textColorHint="#FFFFFF"
-                        android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -169,6 +167,7 @@
 
                     <Button
                         android:id="@+id/button_change_password"
+                        style="@style/button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
@@ -177,8 +176,6 @@
                         android:layout_marginBottom="30dp"
                         android:background="@drawable/ee_edit_button"
                         android:text="Change Password"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -187,6 +184,7 @@
 
                     <EditText
                         android:id="@+id/settingsPassword"
+                        style="@style/editTextUpdateble"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="25dp"
@@ -198,9 +196,6 @@
                         android:paddingStart="30dp"
                         android:paddingEnd="15dp"
                         android:singleLine="true"
-                        android:textColor="#FFEB3B"
-                        android:textColorHint="#FFFFFF"
-                        android:textSize="18sp"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -208,6 +203,7 @@
 
                     <EditText
                         android:id="@+id/settingsPassword2"
+                        style="@style/editTextUpdateble"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginTop="30dp"
@@ -218,9 +214,6 @@
                         android:paddingStart="30dp"
                         android:paddingEnd="15dp"
                         android:singleLine="true"
-                        android:textColor="#FFEB3B"
-                        android:textColorHint="#FFFFFF"
-                        android:textSize="18sp"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/settingsPassword"
@@ -236,11 +229,11 @@
 
             <Button
                 android:id="@+id/buttonSave"
+                style="@style/button"
                 android:layout_width="80dp"
                 android:layout_height="60dp"
                 android:background="@drawable/ee_button"
                 android:text="SAVE"
-                android:textColor="#FFFFFF"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/buttonProfilePicture"
                 app:layout_constraintEnd_toEndOf="@+id/cardView"

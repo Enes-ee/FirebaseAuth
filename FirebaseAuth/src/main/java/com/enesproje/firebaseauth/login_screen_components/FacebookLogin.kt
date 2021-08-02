@@ -13,7 +13,7 @@ import com.google.firebase.ktx.Firebase
 
 class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBinding) {
 
-    private val TAG = "FacebookLogin"
+    private val TAG = "InfoEE_FacebookLogin"
     private var auth = Firebase.auth
 
         fun build(callbackManager: CallbackManager){

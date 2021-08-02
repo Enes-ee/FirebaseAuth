@@ -11,7 +11,7 @@ import com.google.firebase.ktx.Firebase
 class AnonymousLogin (val fragment:Fragment, val binding : FragmentLoginScreenBinding) {
 
     val auth = Firebase.auth
-    val TAG = "AnonymousLogin"
+    val TAG = "InfoEE_AnonymousLogin"
 
     init {
 

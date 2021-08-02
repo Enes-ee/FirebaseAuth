@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="button">
+
+        <item name="android:textSize"> 14sp </item>
+        <item name="android:textColor"> #FFFFFF </item>
+
+    </style>
+
+    <style name="editText">
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorHint">@color/ee_hint_color </item>
+
+    </style>
+
+    <style name="editTextUpdateble">
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor"> @color/ee_update_color </item>
+        <item name="android:textColorHint"> #FFFFFF </item>
+
+    </style>
+
+
+</resources>
