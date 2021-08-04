@@ -35,6 +35,10 @@
 
     <string name="sign_up_by_email">Sign-up with E-mail</string>
 
+    //WarningCreateAccount
+
+    <string name="warningCreateAccountText"> You must be logged-in in order to move to this screen. </string>
+
 
 </resources>
 

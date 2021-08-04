@@ -39,8 +39,8 @@ class QuitAccount : DialogFragment() {
 
     private fun setButtons() {
 
-        var buttonConfirmQuit = binding.buttonConfirmQuit
-        var buttonCancelAction = binding.buttonCancelAction
+        val buttonConfirmQuit = binding.buttonConfirmQuit
+        val buttonCancelAction = binding.buttonCancelAction
 
         buttonConfirmQuit.setOnClickListener {
 
@@ -59,7 +59,7 @@ class QuitAccount : DialogFragment() {
 
     }
 
-    fun roundCornersofDialog(){
+    private fun roundCornersofDialog(){
 
         if (dialog != null && dialog!!.window != null) {
 

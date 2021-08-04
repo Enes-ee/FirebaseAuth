@@ -92,11 +92,17 @@ class AccountSettingsScreen : Fragment() {
 
         editTextEmail.hint = user?.email
 
-        val usernameListener = object : ValueEventListener {
+        database.child("Users").child(userId).child("Username")
+            .addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                binding.settingsUsername.hint = snapshot.value.toString()
+                val username = snapshot.value.toString()
+
+                binding.settingsUsername.hint = username
+
+                if (username == "null") binding.settingsUsername.hint = "Has not been created"
+
 
             }
 
@@ -106,10 +112,7 @@ class AccountSettingsScreen : Fragment() {
 
             }
 
-        }
-
-        database.child("Users").child(userId).child("Username")
-            .addValueEventListener(usernameListener)
+        })
 
     }
 

@@ -35,9 +35,20 @@ class TempMainScreen : Fragment() {
 
     private fun setComponents() {
 
+        val isAnonymous = Firebase.auth.currentUser!!.isAnonymous
+
         binding.buttonAccountSettings.setOnClickListener {
 
-            this.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToAccountSettingsScreen())
+            if (!isAnonymous) {
+
+                this.findNavController()
+                    .navigate(TempMainScreenDirections.actionTempMainScreenToAccountSettingsScreen())
+
+            }else{
+
+                this.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToWarningCreateAccount())
+
+            }
 
         }
 

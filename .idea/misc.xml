@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/drawable/ee_dialog_background.xml" value="0.2703125" />
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout-land/fragment_account_settings_screen.xml" value="0.21516754850088182" />
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout-land/fragment_email_register_screen.xml" value="0.21516754850088182" />
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout-land/fragment_login_screen.xml" value="0.21516754850088182" />
@@ -16,6 +17,7 @@
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout/fragment_login_screen.xml" value="0.2391304347826087" />
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout/fragment_quit_account.xml" value="0.25416666666666665" />
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout/fragment_temp_main_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout/fragment_warning_create_account.xml" value="0.24010416666666667" />
       </map>
     </option>
   </component>
