@@ -42,7 +42,7 @@ class WarningCreateAccount : DialogFragment() {
 
         binding.buttonMove.setOnClickListener {
 
-            findNavController().navigate(WarningCreateAccountDirections.actionWarningCreateAccountToCreateAccount())
+            findNavController().navigate(WarningCreateAccountDirections.actionWarningCreateAccountToLoginScreen())
 
         }
 

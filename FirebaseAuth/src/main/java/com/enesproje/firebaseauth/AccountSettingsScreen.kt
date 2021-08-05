@@ -42,7 +42,7 @@ class AccountSettingsScreen : Fragment() {
 
     val user = Firebase.auth.currentUser
 
-    var anyChanges : MutableMap<String,Any> = mutableMapOf("email" to false, "username" to false, "password" to false, "profilePicture" to true)
+    var anyChanges : MutableMap<String,Any> = mutableMapOf("email" to false, "username" to false, "password" to false, "profilePicture" to false)
     lateinit var profilePicture : ProfilePicture
 
     val database = Firebase.database.reference

@@ -30,9 +30,9 @@ class EmailRegisterScreen : Fragment() {
 
         binding.submit.setOnClickListener{
 
-            var newAccountEmail = binding.registerEmail.text.toString()
-            var newAccountPassword = binding.registerPassword.text.toString()
-            var newAccountPassword2 = binding.registerPassword2.text.toString()
+            val newAccountEmail = binding.registerEmail.text.toString()
+            val newAccountPassword = binding.registerPassword.text.toString()
+            val newAccountPassword2 = binding.registerPassword2.text.toString()
 
             val validity = registeringConditions(newAccountEmail,newAccountPassword,newAccountPassword2)
 
@@ -88,8 +88,9 @@ class EmailRegisterScreen : Fragment() {
                     //updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.e(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(this.context, "An error occured during registration",
+                    Log.e(TAG, "createUserWithEmail:failure :", task.exception)
+
+                    Toast.makeText(this.context, task.exception?.message,
                         Toast.LENGTH_SHORT).show()
                     //updateUI(null)
                 }

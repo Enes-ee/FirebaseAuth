@@ -26,7 +26,7 @@ class QuitAccount : DialogFragment() {
     val auth = Firebase.auth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
 
         _binding = FragmentQuitAccountBinding.inflate(inflater,container,false)
 
@@ -47,7 +47,7 @@ class QuitAccount : DialogFragment() {
             auth.signOut()
             LoginManager.getInstance().logOut()
             dialog!!.dismiss()
-            this.findNavController().navigate(QuitAccountDirections.actionQuitAccountToLoginScreen())
+            findNavController().navigate(QuitAccountDirections.actionQuitAccountToLoginScreen())
 
         }
 

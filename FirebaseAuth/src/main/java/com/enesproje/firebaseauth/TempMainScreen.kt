@@ -41,12 +41,12 @@ class TempMainScreen : Fragment() {
 
             if (!isAnonymous) {
 
-                this.findNavController()
+                findNavController()
                     .navigate(TempMainScreenDirections.actionTempMainScreenToAccountSettingsScreen())
 
             }else{
 
-                this.findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToWarningCreateAccount())
+                findNavController().navigate(TempMainScreenDirections.actionTempMainScreenToWarningCreateAccount())
 
             }
 

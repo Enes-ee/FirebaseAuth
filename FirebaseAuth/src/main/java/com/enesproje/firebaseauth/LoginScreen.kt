@@ -26,6 +26,7 @@ class LoginScreen : Fragment() {
 //    private lateinit var prebuiltLogin : PrebuiltLogin
 
     private val user = Firebase.auth.currentUser
+    private val isAnonymous = Firebase.auth.currentUser?.isAnonymous
 
     private lateinit var googleLogin : GoogleLogin
     private lateinit var facebookLogin : FacebookLogin
@@ -45,15 +46,13 @@ class LoginScreen : Fragment() {
         //Google Login
         googleLogin = GoogleLogin(this, binding)
 
-        //Email and password Login
-        initEmailLogin()
-
         //Anonymous Login
         anonymousLogin = AnonymousLogin(this,binding)
 
-        initForgottenPassword()
+        setComponents()
 
-        initRegisterScreenListener()
+        inCaseOfAnonymousAccess()
+
 
 
 //        Firebase tarafından sağlanan hazır giriş ekranı
@@ -62,31 +61,35 @@ class LoginScreen : Fragment() {
                 return binding.root
     }
 
-    private fun initForgottenPassword() {
+    private fun setComponents() {
 
         binding.tvForgotPassword.setOnClickListener {
 
-            it.findNavController().navigate(LoginScreenDirections.actionLoginScreenToForgottenPassword())
+            findNavController().navigate(LoginScreenDirections.actionLoginScreenToForgottenPassword())
 
         }
-    }
-
-    private fun initEmailLogin() {
 
         binding.emailLoginButton.setOnClickListener {
 
-            it.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailLogin())
+            findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailLogin())
+
+        }
+
+        binding.tvCreateAccount.setOnClickListener {
+
+            findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailRegisterScreen())
 
         }
 
     }
 
+    private fun inCaseOfAnonymousAccess() {
 
-    private fun initRegisterScreenListener() {
+        if (isAnonymous == true) {
 
-        binding.tvCreateAccount.setOnClickListener {
+            binding.anonymousLoginButton.text = getString(R.string.continue_as_anonymous)
 
-            it.findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailRegisterScreen())
+            binding.statusWarning!!.visibility = View.VISIBLE
 
         }
 
@@ -106,32 +109,22 @@ class LoginScreen : Fragment() {
     }
 
 
-
-
-    fun successfulLoginNavigation() {
-
-        this.findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
-
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     override fun onStart() {
         super.onStart()
 
         ForceUpdateChecker.with(this.requireActivity(),this).checkAsynchronous(60)
 
-        if (user != null){
+        if (user != null && !isAnonymous!!) {
 
-            successfulLoginNavigation()
+            findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
 
         }
 
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 

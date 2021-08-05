@@ -2,26 +2,34 @@ package com.enesproje.firebaseauth.login_screen_components
 
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.enesproje.firebaseauth.LoginScreen
+import com.enesproje.firebaseauth.LoginScreenDirections
 import com.enesproje.firebaseauth.R
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
+import com.facebook.AccessToken
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 
 import com.google.firebase.ktx.Firebase
 
 
-class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBinding){
+class GoogleLogin(val fragment: LoginScreen, val binding: FragmentLoginScreenBinding){
 
     val auth = Firebase.auth
     val gso : GoogleSignInOptions
-    val mGoogleSignInClient : GoogleSignInClient
+    val isAnonymous = Firebase.auth.currentUser?.isAnonymous
+
+    private val mGoogleSignInClient : GoogleSignInClient
     private val TAG = "InfoEE_GoogleLogin"
 
 
@@ -38,7 +46,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
 
     }
 
-    fun initGoogleLogin(){
+    private fun initGoogleLogin(){
 
         binding.googleLoginButton.setOnClickListener {
 
@@ -53,7 +61,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
     }
 
 
-    fun firebaseAuthWithGoogle(idToken: String) {
+    private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(fragment.requireActivity()) { task ->
@@ -61,7 +69,7 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
                         // Sign in success, update UI with the signed-in user's information
                         Log.e(TAG, "signInWithCredential:success")
                         //updateUI(user)
-                        (fragment as LoginScreen).successfulLoginNavigation()
+                        findNavController(fragment).navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
 
                     } else {
                         // If sign in fails, display a message to the user.
@@ -86,7 +94,14 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 Log.e(TAG, "firebaseAuthWithGoogle:" + account.id)
-                firebaseAuthWithGoogle(account.idToken!!)
+
+                if (isAnonymous == true){
+                    linkToAnonymous(account.idToken!!)
+                }else{
+                    firebaseAuthWithGoogle(account.idToken!!)
+                }
+
+
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.e(TAG, "Google sign in failed", e)
@@ -94,6 +109,29 @@ class GoogleLogin(val fragment: Fragment, val binding: FragmentLoginScreenBindin
             }
         }
 
+    }
+
+    private fun linkToAnonymous (idToken : String) {
+
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.currentUser!!.linkWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.e(TAG, "linkWithCredential:success")
+                    Toast.makeText(fragment.requireContext() , "You registered with your google account successfully.",
+                        Toast.LENGTH_SHORT).show()
+                    findNavController(fragment).navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
+                    val user = task.result?.user
+
+                } else {
+                    Log.e(TAG, "linkWithCredential:failure", task.exception)
+                    Toast.makeText(fragment.requireContext(), """This google account is registered as different user, 
+                        |You are still anonymous""".trimMargin(),
+                        Toast.LENGTH_SHORT).show()
+
+                }
+
+            }
     }
 
 }

@@ -49,11 +49,11 @@
 
                     <TextView
                         android:id="@+id/textView5"
+                        style="@style/standardText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="E-mail"
-                        android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/settingsUsername"
                         app:layout_constraintStart_toStartOf="@+id/settingsUsername"
                         app:layout_constraintTop_toBottomOf="@+id/settingsUsername" />
@@ -67,6 +67,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="25dp"
                         android:background="@drawable/ee_textview"
+                        android:hint="Has not been created"
                         android:paddingStart="30dp"
                         android:paddingEnd="15dp"
                         android:singleLine="true"
@@ -100,11 +101,11 @@
 
                     <TextView
                         android:id="@+id/textView4"
+                        style="@style/standardText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
                         android:text="Username"
-                        android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/settingsUsername"
                         app:layout_constraintStart_toStartOf="@+id/settingsUsername"
                         app:layout_constraintTop_toTopOf="parent" />

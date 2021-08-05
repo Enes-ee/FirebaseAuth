@@ -20,11 +20,11 @@
 
     <TextView
         android:id="@+id/tvCreateAccount"
+        style="@style/standardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="@string/create_a_new_account"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/anonymousLoginButton"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/anonymousLoginButton"
@@ -32,11 +32,11 @@
 
     <TextView
         android:id="@+id/tvForgotPassword"
+        style="@style/standardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/forgot_my_password"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/tvCreateAccount"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="@+id/tvCreateAccount"
@@ -44,15 +44,15 @@
 
     <Button
         android:id="@+id/googleLoginButton"
+        style="@style/standardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ee_google_button_ripple"
         android:gravity="start|center_vertical"
         android:paddingStart="70dp"
-        android:text="@string/sign_in_by_google"
+        android:text="@string/sign_in_by_google_caps"
         android:textAllCaps="false"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/facebookLoginButton"
         app:layout_constraintEnd_toEndOf="@+id/anonymousLoginButton"
         app:layout_constraintHorizontal_bias="0.0"
@@ -60,15 +60,15 @@
 
     <Button
         android:id="@+id/anonymousLoginButton"
+        style="@style/standardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ee_anonymous_button_ripple"
         android:gravity="start|center_vertical"
         android:paddingStart="70dp"
-        android:text="@string/sign_in_anonymous"
+        android:text="@string/sign_in_anonymous_caps"
         android:textAllCaps="false"
         android:textColor="#D9FFFFFF"
-        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,16 +77,16 @@
 
     <Button
         android:id="@+id/emailLoginButton"
+        style="@style/standardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ee_email_button_ripple"
         android:gravity="start|center_vertical"
         android:paddingStart="70dp"
-        android:text="@string/sign_in_by_e_mail"
+        android:text="@string/sign_in_by_e_mail_caps"
         android:textAllCaps="false"
         android:textColor="#D9FFFFFF"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/anonymousLoginButton"
         app:layout_constraintEnd_toEndOf="@+id/anonymousLoginButton"
         app:layout_constraintHorizontal_bias="0.0"
@@ -94,20 +94,34 @@
 
     <Button
         android:id="@+id/facebookLoginButton"
+        style="@style/standardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ee_facebook_button_ripple"
         android:gravity="start|center_vertical"
         android:paddingStart="70dp"
-        android:text="@string/sign_in_by_facebook"
+        android:text="@string/sign_in_by_facebook_caps"
         android:textAllCaps="false"
         android:textColor="#D9FFFFFF"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/emailLoginButton"
         app:layout_constraintEnd_toEndOf="@+id/anonymousLoginButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/anonymousLoginButton" />
+
+    <TextView
+        android:id="@+id/statusWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/status"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/googleLoginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <!--    <fragment-->

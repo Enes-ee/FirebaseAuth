@@ -3,18 +3,26 @@ package com.enesproje.firebaseauth.login_screen_components
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.enesproje.firebaseauth.LoginScreen
+import com.enesproje.firebaseauth.LoginScreenDirections
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
 import com.facebook.*
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.facebook.AccessToken
 
-class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBinding) {
+
+
+
+class FacebookLogin(var fragment : LoginScreen, var binding : FragmentLoginScreenBinding) {
 
     private val TAG = "InfoEE_FacebookLogin"
     private var auth = Firebase.auth
+    private val isAnonymous = Firebase.auth.currentUser?.isAnonymous
 
         fun build(callbackManager: CallbackManager){
 
@@ -24,15 +32,16 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
 
         }
 
-        fun initFacebookLogin(callbackManager: CallbackManager) {
+        private fun initFacebookLogin(callbackManager: CallbackManager) {
 
-            binding.facebookButton.setFragment(fragment)
+            binding.facebookButton.fragment = fragment
             binding.facebookButton.setPermissions(listOf("email", "public_profile"))
             binding.facebookButton.registerCallback(callbackManager, object :
                 FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
                     Log.e(TAG, "facebook:onSuccess:$loginResult")
-                    handleFacebookAccessToken(loginResult.accessToken)
+
+                        handleFacebookAccessToken(loginResult.accessToken)
 
                 }
 
@@ -52,41 +61,51 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
             Log.e(TAG, "handleFacebookAccessToken:$token")
 
             val credential = FacebookAuthProvider.getCredential(token!!.token)
-            auth.signInWithCredential(credential)
-                .addOnCompleteListener() { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.e(TAG, "signInWithCredential:success")
-                        (fragment as LoginScreen).successfulLoginNavigation()
 
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.e(TAG, "signInWithCredential:failure", task.exception)
-                        Toast.makeText(
-                            fragment.activity, "Authentication failed.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+            if (isAnonymous == true) {
+
+                linkToAnonymous(token)
+
+            } else {
+
+                auth.signInWithCredential(credential)
+                    .addOnCompleteListener() { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.e(TAG, "signInWithCredential:success")
+                            findNavController(fragment).navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.e(TAG, "signInWithCredential:failure", task.exception)
+                            Toast.makeText(
+                                fragment.activity, "Authentication failed.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        // ...
                     }
+            }
 
-                    // ...
-                }
         }
 
-        fun initFacebookButtonListener() {
+        private fun initFacebookButtonListener() {
 
             binding.facebookLoginButton.setOnClickListener {
 
-                var profile : Profile? = Profile.getCurrentProfile()
+                val accessToken = AccessToken.getCurrentAccessToken()
+                val isLoggedIn = accessToken != null && !accessToken.isExpired
 
-                Log.e("Current Profile","$profile")
+                val profile : Profile? = Profile.getCurrentProfile()
 
-                if (profile != null){
+                Log.e(TAG,"Current Profile : $profile")
 
-                    val accessToken = AccessToken.getCurrentAccessToken()
+                if (isLoggedIn) {
 
                     handleFacebookAccessToken(accessToken)
 
-                }else{
+                } else {
 
                     binding.facebookButton.performClick()
 
@@ -94,5 +113,28 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
 
             }
         }
+
+    private fun linkToAnonymous (token: AccessToken?) {
+        Log.e(TAG, "handleFacebookAccessToken:$token")
+
+        val credential = FacebookAuthProvider.getCredential(token!!.token)
+        auth.currentUser!!.linkWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.e(TAG, "linkWithCredential:success")
+                    Toast.makeText(fragment.requireContext() , "You registered with your facebook account successfully.",Toast.LENGTH_SHORT).show()
+                    findNavController(fragment).navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
+                    val user = task.result?.user
+
+                } else {
+                    Log.e(TAG, "linkWithCredential:failure", task.exception)
+                    Toast.makeText(fragment.requireContext(), """This facebook account is registered as different user, 
+                        |You are still anonymous""".trimMargin(),
+                        Toast.LENGTH_SHORT).show()
+
+                }
+
+            }
+    }
 
 }
