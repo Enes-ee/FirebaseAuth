@@ -71,12 +71,6 @@
         <action
             android:id="@+id/action_tempMainScreen_to_quitAccount"
             app:destination="@id/quitAccount" />
-        <action
-            android:id="@+id/action_tempMainScreen_to_createAccount"
-            app:destination="@id/createAccount" />
-        <action
-            android:id="@+id/action_tempMainScreen_to_warningCreateAccount"
-            app:destination="@id/warningCreateAccount" />
     </fragment>
     <dialog
         android:id="@+id/emailLogin"
@@ -118,30 +112,5 @@
             app:destination="@id/loginScreen"
             app:popUpTo="@id/quitAccount"
             app:popUpToInclusive="true" />
-    </dialog>
-    <fragment
-        android:id="@+id/createAccount"
-        android:name="com.enesproje.firebaseauth.dialog_fragments.CreateAccount"
-        android:label="fragment_create_account"
-        tools:layout="@layout/fragment_create_account" >
-        <action
-            android:id="@+id/action_createAccount_to_emailRegisterScreen"
-            app:destination="@id/emailRegisterScreen" />
-        <action
-            android:id="@+id/action_createAccount_to_tempMainScreen"
-            app:destination="@id/tempMainScreen" />
-    </fragment>
-    <dialog
-        android:id="@+id/warningCreateAccount"
-        android:name="com.enesproje.firebaseauth.dialog_fragments.WarningCreateAccount"
-        android:label="fragment_warning_create_account"
-        tools:layout="@layout/fragment_warning_create_account" >
-        <action
-            android:id="@+id/action_warningCreateAccount_to_createAccount"
-            app:destination="@id/createAccount"
-            app:enterAnim="@anim/slide_from_right"
-            app:exitAnim="@anim/slide_to_left"
-            app:popEnterAnim="@anim/slide_from_left"
-            app:popExitAnim="@anim/slide_to_right" />
     </dialog>
 </navigation>

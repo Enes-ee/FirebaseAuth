@@ -3,10 +3,8 @@ package com.enesproje.firebaseauth.login_screen_components
 import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
 import com.enesproje.firebaseauth.LoginScreen
 import com.enesproje.firebaseauth.R
-import com.enesproje.firebaseauth.databinding.FragmentCreateAccountBinding
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

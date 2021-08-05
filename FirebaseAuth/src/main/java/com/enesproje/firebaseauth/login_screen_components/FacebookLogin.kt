@@ -26,7 +26,7 @@ class FacebookLogin(var fragment : Fragment, var binding : FragmentLoginScreenBi
 
         fun initFacebookLogin(callbackManager: CallbackManager) {
 
-            binding.facebookButton.fragment = fragment
+            binding.facebookButton.setFragment(fragment)
             binding.facebookButton.setPermissions(listOf("email", "public_profile"))
             binding.facebookButton.registerCallback(callbackManager, object :
                 FacebookCallback<LoginResult> {
