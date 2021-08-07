@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_loginScreen_to_forgottenPassword"
             app:destination="@id/forgottenPassword" />
+        <action
+            android:id="@+id/action_loginScreen_to_leaveApp"
+            app:destination="@id/leaveApp" />
     </fragment>
     <fragment
         android:id="@+id/emailRegisterScreen"
@@ -129,6 +132,15 @@
         tools:layout="@layout/fragment_warning_create_account" >
         <action
             android:id="@+id/action_warningCreateAccount_to_loginScreen"
+            app:destination="@id/loginScreen" />
+    </dialog>
+    <dialog
+        android:id="@+id/leaveApp"
+        android:name="com.enesproje.firebaseauth.dialog_fragments.LeaveApp"
+        android:label="fragment_leave_app"
+        tools:layout="@layout/fragment_leave_app" >
+        <action
+            android:id="@+id/action_leaveApp_to_loginScreen"
             app:destination="@id/loginScreen" />
     </dialog>
 </navigation>

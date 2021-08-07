@@ -24,7 +24,6 @@
     <string name="status">You are anonymous \nContinue with options below</string>
 
 
-
     //TempMainScreen
     <string name="anonymous_authentication">Logged in anonymously</string>
 
@@ -43,6 +42,10 @@
     //WarningCreateAccount
 
     <string name="warningCreateAccountText">You must have logged-in in order to move Account Settings</string>
+
+    //LeaveApp
+
+    <string name="leaveAppWarning">You are leaving the app. \nAre you sure? </string>
 
 
 </resources>

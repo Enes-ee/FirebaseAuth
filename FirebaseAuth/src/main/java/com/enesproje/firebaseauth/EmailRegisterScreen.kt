@@ -1,6 +1,7 @@
 package com.enesproje.firebaseauth
 
 import android.os.Bundle
+import android.text.format.DateUtils.LENGTH_MEDIUM
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.enesproje.firebaseauth.dialog_fragments.EmailLogin
 import com.enesproje.firebaseauth.databinding.FragmentEmailRegisterScreenBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -24,7 +24,7 @@ class EmailRegisterScreen : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentEmailRegisterScreenBinding.inflate(inflater,container,false)
 
@@ -36,9 +36,7 @@ class EmailRegisterScreen : Fragment() {
 
             val validity = registeringConditions(newAccountEmail,newAccountPassword,newAccountPassword2)
 
-            if(validity == true) {
-                registerToFirebase(newAccountEmail,newAccountPassword)
-            }
+            if(validity) registerToFirebase(newAccountEmail,newAccountPassword)
 
         }
 
@@ -64,7 +62,7 @@ class EmailRegisterScreen : Fragment() {
                     val regex = Regex(""".+@\w+\.\w+""")
                     val sonuc = regex.matchEntire(newAccountEmail)
                     if (!sonuc?.value.isNullOrEmpty()) stage++ else {
-                        Toast.makeText(this.context, "Entered e-mail adress does not meet requirements", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this.context, "Entered e-mail address does not meet requirements", Toast.LENGTH_SHORT).show()
                         break
                     }
                 }

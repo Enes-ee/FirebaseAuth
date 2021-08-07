@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -55,6 +56,7 @@ class LoginScreen : Fragment() {
 
 
 
+
 //        Firebase tarafından sağlanan hazır giriş ekranı
 //        PrebuiltLogin(this).loadPreBuiltLoginScreen()
 
@@ -78,6 +80,12 @@ class LoginScreen : Fragment() {
         binding.tvCreateAccount.setOnClickListener {
 
             findNavController().navigate(LoginScreenDirections.actionLoginScreenToEmailRegisterScreen())
+
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this){
+
+            findNavController().navigate(LoginScreenDirections.actionLoginScreenToLeaveApp())
 
         }
 
@@ -121,6 +129,8 @@ class LoginScreen : Fragment() {
         }
 
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()
