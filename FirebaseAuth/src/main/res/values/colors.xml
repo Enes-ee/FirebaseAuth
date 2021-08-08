@@ -10,6 +10,6 @@
     <color name="ee_textview_color">#59000000</color>
     <color name="ee_hint_color">#FF1AA4E3</color>
     <color name="ee_update_color">#FFE500</color>
-
+    <color name="ee_successful_green">#00FF00</color>
 
 </resources>

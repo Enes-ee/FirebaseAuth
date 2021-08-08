@@ -29,7 +29,10 @@
 
     //AccountSettingsScreen
 
-    <string name="unverified_email">* Your e-mail has not been verified.</string>
+    <string name="unverified_email">Your e-mail has not been verified!</string>
+    <string name="verified_email">ACCOUNT VERIFIED</string>
+    <string name="sent_email_verification">A verification e-mail has been sent. \nPlease check your e-mail box.</string>
+
 
     //ForceUpdate
 

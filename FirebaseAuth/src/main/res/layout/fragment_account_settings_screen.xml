@@ -85,7 +85,7 @@
                         android:layout_marginStart="25dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="25dp"
-                        android:layout_marginBottom="30dp"
+                        android:layout_marginBottom="15dp"
                         android:background="@drawable/ee_textview"
                         android:inputType="textEmailAddress"
                         android:paddingStart="30dp"
@@ -94,7 +94,6 @@
                         android:textColorHint="#FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView5"
                         app:layout_constraintVertical_bias="0.0" />
@@ -104,7 +103,7 @@
                         style="@style/standardText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="15dp"
                         android:text="Username"
                         app:layout_constraintEnd_toEndOf="@+id/settingsUsername"
                         app:layout_constraintStart_toStartOf="@+id/settingsUsername"
@@ -112,14 +111,14 @@
 
                     <Button
                         android:id="@+id/buttonVerifyEmail"
-                        android:layout_width="wrap_content"
+                        style="@style/button"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="15dp"
                         android:background="@drawable/ee_edit_button"
                         android:text="VERIFY"
                         android:textColor="#FFFFFF"
-                        android:textSize="16sp"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/settingsEmail"
@@ -131,13 +130,14 @@
                         style="@style/standardText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:text="@string/unverified_email"
                         android:textColor="@android:color/holo_red_light"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="@+id/settingsEmail"
                         app:layout_constraintStart_toStartOf="@+id/settingsEmail"
-                        app:layout_constraintTop_toBottomOf="@+id/settingsEmail" />
+                        app:layout_constraintTop_toBottomOf="@+id/settingsEmail"
+                        tools:visibility="gone" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

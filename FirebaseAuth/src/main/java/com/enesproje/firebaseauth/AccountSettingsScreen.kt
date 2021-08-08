@@ -1,8 +1,6 @@
 package com.enesproje.firebaseauth
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,18 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.enesproje.firebaseauth.databinding.FragmentAccountSettingsScreenBinding
 import com.enesproje.firebaseauth.mechanics.ProfilePicture
 import com.google.firebase.auth.ktx.auth
@@ -66,6 +57,10 @@ class AccountSettingsScreen : Fragment() {
 
         checkEmailVerification()
 
+        checkEmailVerificationCyclical()
+
+        activateVerifyButton()
+
         setInformation(editTextUsername, editTextEmail)
 
         val componentList = mutableListOf<EditText>(
@@ -84,7 +79,26 @@ class AccountSettingsScreen : Fragment() {
         return binding.root
     }
 
+    private fun activateVerifyButton() {
 
+        binding.buttonVerifyEmail.setOnClickListener {
+
+            user!!.sendEmailVerification()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.e(TAG, "Verification email is sent.")
+                        Toast.makeText(
+                            this.context,
+                            getString(R.string.sent_email_verification),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+        }
+
+
+    }
 
 
     private fun setInformation(editTextUsername: EditText, editTextEmail: EditText) {
@@ -355,6 +369,8 @@ class AccountSettingsScreen : Fragment() {
 
             val isEmailVerified = user.isEmailVerified
 
+            Log.e(TAG,"isEmailVerified : $isEmailVerified")
+
             if (!isEmailVerified) {
 
                 val buttonVerifyEmail = binding.buttonVerifyEmail
@@ -363,31 +379,47 @@ class AccountSettingsScreen : Fragment() {
                 buttonVerifyEmail.visibility = View.VISIBLE
                 tvVerifyEmail.visibility = View.VISIBLE
 
-                tvVerifyEmail.setOnClickListener {
-
-                    verifyEmail()
-
-                }
-
             }
 
         }
 
     }
 
-    private fun verifyEmail() {
+    private fun checkEmailVerificationCyclical() {
 
-        user!!.sendEmailVerification()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.e(TAG, "Verification email sent.")
-                    Toast.makeText(
-                        this.context,
-                        "A verification e-mail has been sent to your e-mail box.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+        val scope = MainScope().launch(Dispatchers.IO) {
+
+            var isEmailVerified = user!!.isEmailVerified
+
+            while (!isEmailVerified) {
+
+                delay(1000)
+
+                user.reload()
+
+                isEmailVerified = user.isEmailVerified
+
+                Log.e(TAG,"isEmailVerified : $isEmailVerified")
+
             }
+
+            withContext(Dispatchers.Main){
+
+                val buttonVerifyEmail = binding.buttonVerifyEmail
+                val tvVerifyEmail = binding.tvVerifyEmail
+
+                //Layout rearrange
+
+                tvVerifyEmail.visibility = View.INVISIBLE
+                buttonVerifyEmail.background = ContextCompat.getDrawable(this@AccountSettingsScreen.requireContext(),R.drawable.successful_passive_button)
+                buttonVerifyEmail.text = getString(R.string.verified_email)
+                buttonVerifyEmail.isEnabled = false
+                (buttonVerifyEmail.layoutParams as ConstraintLayout.LayoutParams).topToBottom = binding.settingsEmail.id
+                (buttonVerifyEmail.layoutParams as ConstraintLayout.LayoutParams).topMargin = (15 * Resources.getSystem().displayMetrics.density).toInt()
+
+            }
+
+        }
 
     }
 

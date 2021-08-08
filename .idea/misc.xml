@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/drawable/ee_button.xml" value="0.2703125" />
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/drawable/ee_edit_button.xml" value="0.2703125" />
+        <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/drawable/successful_passive_button.xml" value="0.2703125" />
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout-land/fragment_account_settings_screen.xml" value="0.2765625" />
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout-land/fragment_email_register_screen.xml" value="0.2765625" />
         <entry key="..\:/EEFirebaseAuthExample/FirebaseAuth/src/main/res/layout-land/fragment_login_screen.xml" value="0.2765625" />

@@ -40,7 +40,7 @@ class EmailLogin : DialogFragment() {
         return binding.root
     }
 
-    fun createNewDialog(){
+    private fun createNewDialog(){
 
         binding.loginButton.setOnClickListener {
 
@@ -61,7 +61,7 @@ class EmailLogin : DialogFragment() {
 
     }
 
-    fun commenceEmailLogin(email : String , password: String){
+    private fun commenceEmailLogin(email : String, password: String){
 
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this.requireActivity()) { task ->
@@ -106,7 +106,7 @@ class EmailLogin : DialogFragment() {
         return stage == 3
     }
 
-    fun roundCornersofDialog(){
+    private fun roundCornersofDialog(){
 
         if (dialog != null && dialog!!.window != null) {
 
