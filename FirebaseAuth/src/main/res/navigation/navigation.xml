@@ -23,7 +23,8 @@
             app:exitAnim="@anim/slide_to_left"
             app:popEnterAnim="@anim/slide_from_left"
             app:popExitAnim="@anim/slide_to_right"
-            app:popUpTo="@id/loginScreen" />
+            app:popUpTo="@id/loginScreen"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_loginScreen_to_emailLogin"
             app:destination="@id/emailLogin" />
@@ -92,6 +93,9 @@
             app:destination="@id/tempMainScreen"
             app:popUpTo="@id/loginScreen"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_emailLogin_to_loginScreen"
+            app:destination="@id/loginScreen" />
     </dialog>
     <fragment
         android:id="@+id/accountSettingsScreen"

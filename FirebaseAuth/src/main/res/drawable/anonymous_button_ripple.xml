@@ -9,5 +9,5 @@
         </shape>
     </item>
 
-    <item android:drawable="@drawable/ee_email_button" />
+    <item android:drawable="@drawable/anonymous_button" />
 </ripple>

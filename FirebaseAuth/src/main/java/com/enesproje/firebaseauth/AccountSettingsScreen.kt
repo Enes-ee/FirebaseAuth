@@ -2,6 +2,7 @@ package com.enesproje.firebaseauth
 
 import android.content.res.Resources
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,8 @@ class AccountSettingsScreen : Fragment() {
     val database = Firebase.database.reference
 
     val userId = user!!.uid
+
+    var timer : CountDownTimer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -94,6 +97,27 @@ class AccountSettingsScreen : Fragment() {
                         ).show()
                     }
                 }
+
+            it.isEnabled = false
+            it.background = ContextCompat.getDrawable(this@AccountSettingsScreen.requireContext(),R.drawable.disabled_edit_button)
+
+            timer = object : CountDownTimer(30000,1000){
+
+                override fun onTick(millisUntilFinished: Long) {
+
+                    binding.buttonVerifyEmail.text = "VERIFY (${(millisUntilFinished/1000).toString()} s)"
+
+                }
+
+                override fun onFinish() {
+
+                    it.isEnabled = true
+                    binding.buttonVerifyEmail.text = "VERIFY"
+                    it.background = ContextCompat.getDrawable(this@AccountSettingsScreen.requireContext(),R.drawable.edit_button)
+
+                }
+
+            }.start()
 
         }
 
@@ -426,6 +450,7 @@ class AccountSettingsScreen : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        timer?.cancel()
     }
 
 

@@ -1,14 +1,22 @@
 package com.enesproje.firebaseauth
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import bolts.Task.delay
 import com.enesproje.firebaseauth.login_screen_components.FacebookLogin
 import com.enesproje.firebaseauth.login_screen_components.GoogleLogin
 import com.enesproje.firebaseauth.databinding.FragmentLoginScreenBinding
@@ -53,8 +61,6 @@ class LoginScreen : Fragment() {
         setComponents()
 
         inCaseOfAnonymousAccess()
-
-
 
 
 //        Firebase tarafından sağlanan hazır giriş ekranı
@@ -122,9 +128,25 @@ class LoginScreen : Fragment() {
 
         ForceUpdateChecker.with(this.requireActivity(),this).checkAsynchronous(60)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         if (user != null && !isAnonymous!!) {
 
-            findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
+            object : CountDownTimer(500,1000) {
+                override fun onTick(millisUntilFinished: Long) {
+
+                }
+
+                override fun onFinish() {
+                    Log.e("ABB","ABB")
+                    findNavController().navigate(LoginScreenDirections.actionLoginScreenToTempMainScreen())
+                }
+
+
+            }.start()
 
         }
 

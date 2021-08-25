@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/ee_dialog_background"
+    android:background="@drawable/dialog_background"
     tools:context=".dialog_fragments.EmailLogin">
 
     <EditText
@@ -15,7 +15,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/ee_textview"
+        android:background="@drawable/textview"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
@@ -32,7 +32,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/ee_textview"
+        android:background="@drawable/textview"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -53,7 +53,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="50dp"
-        android:background="@drawable/ee_button"
+        android:background="@drawable/button"
         android:fontFamily="sans-serif-medium"
         android:text="LOGIN"
         android:textColor="#FFFFFF"

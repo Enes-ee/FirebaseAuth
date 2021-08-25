@@ -5,7 +5,7 @@
 
         <item name="android:textSize"> 14sp </item>
         <item name="android:textColor"> #FFFFFF </item>
-        <item name="android:background"> @drawable/ee_button </item>
+        <item name="android:background">@drawable/button</item>
 
     </style>
 
@@ -13,14 +13,14 @@
 
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textColorHint">@color/ee_hint_color </item>
+        <item name="android:textColorHint">@color/hint_color</item>
 
     </style>
 
     <style name="editTextUpdateble">
 
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor"> @color/ee_update_color </item>
+        <item name="android:textColor">@color/update_color</item>
         <item name="android:textColorHint"> #FFFFFF </item>
 
     </style>

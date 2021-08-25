@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/ripple_material_dark">
 
@@ -9,5 +10,16 @@
         </shape>
     </item>
 
-    <item android:drawable="@drawable/ee_anonymous_button" />
+    <item>
+
+        <shape android:shape="rectangle">
+
+            <solid android:color="@color/colorAccent"/>
+            <size android:height="50dp" android:width="330dp"/>
+            <corners android:radius="25dp"/>
+
+        </shape>
+
+    </item>
+
 </ripple>

@@ -51,7 +51,7 @@ class EmailLogin : DialogFragment() {
 
             val validate = loggingConditions(email,password)
 
-            if(validate == true) {
+            if(validate) {
 
                 commenceEmailLogin(email,password)
 
@@ -68,7 +68,7 @@ class EmailLogin : DialogFragment() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.e(TAG, "signInWithEmail:success")
-                        this.findNavController().navigate(EmailLoginDirections.actionEmailLoginToTempMainScreen())
+                        findNavController().navigate(EmailLoginDirections.actionEmailLoginToLoginScreen())
 
                     } else {
                         // If sign in fails, display a message to the user.
