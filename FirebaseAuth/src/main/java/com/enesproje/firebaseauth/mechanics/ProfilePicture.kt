@@ -1,15 +1,10 @@
 package com.enesproje.firebaseauth.mechanics
 
-import android.accounts.Account
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.util.Log
-import android.widget.ImageButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.graphics.drawable.toBitmap
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -41,10 +36,11 @@ class ProfilePicture (val fragment : AccountSettingsScreen , val binding : Fragm
 
     private fun setProfilePicture() {
 
-        val imagePath = fragment.requireContext().getDir("profilePictures", Context.MODE_PRIVATE).absolutePath
+        //val imagePath = fragment.requireContext().getDir("profilePictures", Context.MODE_PRIVATE).absolutePath
+        val imagePath2 = fragment.requireContext().filesDir.absolutePath + File.separator + "profilePictures"
 
         try {
-            val f = File(imagePath, "profilePicture_$userId.jpg")
+            val f = File(imagePath2, "profilePicture_$userId.jpg")
             val b = BitmapFactory.decodeStream(FileInputStream(f))
             val img = binding.buttonProfilePicture
 
@@ -149,13 +145,16 @@ class ProfilePicture (val fragment : AccountSettingsScreen , val binding : Fragm
     private fun saveProfilePictureToInternalStorage(bitmapImage: Bitmap) : String {
 
 
-        // path to /data/data/yourapp/app_data/imageDir
-        val directory = fragment.requireContext().getDir("profilePictures", Context.MODE_PRIVATE)
+        val directory = fragment.requireContext().filesDir.absolutePath + File.separator + "profilePictures"
         // Create imageDir
-        val mypath = File(directory, "profilePicture_$userId.jpg")
+        val file = File(directory, "profilePicture_$userId.jpg")
+
+        file.parentFile.mkdirs()
+        file.createNewFile()
+
         var fos: FileOutputStream? = null
         try {
-            fos = FileOutputStream(mypath)
+            fos = FileOutputStream(file)
             // Use the compress method on the BitMap object to write image to the OutputStream
             bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos)
 
@@ -169,7 +168,7 @@ class ProfilePicture (val fragment : AccountSettingsScreen , val binding : Fragm
             }
         }
 
-        return directory.absolutePath
+        return directory
 
     }
 
@@ -190,6 +189,8 @@ class ProfilePicture (val fragment : AccountSettingsScreen , val binding : Fragm
                 Log.e(TAG,"Loading of profile picture to firebase has failed")
 
             }
+
+        baos.close()
 
     }
 

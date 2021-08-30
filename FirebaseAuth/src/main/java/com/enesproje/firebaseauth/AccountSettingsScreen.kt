@@ -423,7 +423,7 @@ class AccountSettingsScreen : Fragment() {
 
                 isEmailVerified = user.isEmailVerified
 
-                Log.e(TAG,"isEmailVerified : $isEmailVerified")
+                Log.w(TAG,"isEmailVerified : $isEmailVerified")
 
             }
 
