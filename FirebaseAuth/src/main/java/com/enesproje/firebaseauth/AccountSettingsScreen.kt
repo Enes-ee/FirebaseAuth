@@ -33,13 +33,11 @@ class AccountSettingsScreen : Fragment() {
     val TAG = "InfoEE_AccountSettings"
 
     val user = Firebase.auth.currentUser
+    val userId = user!!.uid
+    val database = Firebase.database.reference
 
     var anyChanges : MutableMap<String,Any> = mutableMapOf("email" to false, "username" to false, "password" to false, "profilePicture" to false)
     lateinit var profilePicture : ProfilePicture
-
-    val database = Firebase.database.reference
-
-    val userId = user!!.uid
 
     var timer : CountDownTimer? = null
 
@@ -219,9 +217,6 @@ class AccountSettingsScreen : Fragment() {
 
                     Log.e(TAG,"Changes : " + anyChanges.toString())
 
-                    Toast.makeText(this.context, "Changes have been saved.", Toast.LENGTH_SHORT)
-                        .show()
-
                 }
 
                 else if (eachItem.value == "error") {
@@ -231,6 +226,9 @@ class AccountSettingsScreen : Fragment() {
                 }
 
             }
+
+            Toast.makeText(this.context, "Changes have been saved.", Toast.LENGTH_SHORT)
+                .show()
 
         }
 
@@ -350,11 +348,11 @@ class AccountSettingsScreen : Fragment() {
 
                 if (eachComponent.text.toString().length == 1) {
 
-                    makeSaveButtonVisible()
+                    setSaveButtonVisible()
 
                 } else if (eachComponent.text.isNullOrEmpty() && anyChanges["profilePicture"] == false) {
 
-                    makeSaveButtonGone()
+                    setSaveButtonGone()
 
                 }
 
@@ -364,7 +362,7 @@ class AccountSettingsScreen : Fragment() {
 
     }
 
-    fun makeSaveButtonVisible() {
+    fun setSaveButtonVisible() {
 
         val buttonSave = binding.buttonSave
 
@@ -375,7 +373,7 @@ class AccountSettingsScreen : Fragment() {
 
     }
 
-    fun makeSaveButtonGone() {
+    fun setSaveButtonGone() {
 
         val buttonSave = binding.buttonSave
 

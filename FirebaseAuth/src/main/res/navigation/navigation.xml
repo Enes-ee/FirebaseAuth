@@ -101,7 +101,11 @@
         android:id="@+id/accountSettingsScreen"
         android:name="com.enesproje.firebaseauth.AccountSettingsScreen"
         android:label="fragment_account_settings_screen"
-        tools:layout="@layout/fragment_account_settings_screen" />
+        tools:layout="@layout/fragment_account_settings_screen" >
+        <action
+            android:id="@+id/action_accountSettingsScreen_to_loadProfilePicture"
+            app:destination="@id/loadProfilePicture" />
+    </fragment>
     <dialog
         android:id="@+id/forceUpdate"
         android:name="com.enesproje.firebaseauth.dialog_fragments.ForceUpdate"
@@ -147,4 +151,8 @@
             android:id="@+id/action_leaveApp_to_loginScreen"
             app:destination="@id/loginScreen" />
     </dialog>
+    <dialog
+        android:id="@+id/loadProfilePicture"
+        android:name="com.enesproje.firebaseauth.sheets.LoadProfilePicture"
+        android:label="fragment_load_profile_picture" />
 </navigation>

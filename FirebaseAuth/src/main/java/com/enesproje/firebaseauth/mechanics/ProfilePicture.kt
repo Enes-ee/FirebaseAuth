@@ -2,9 +2,14 @@ package com.enesproje.firebaseauth.mechanics
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.net.toUri
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -25,22 +30,63 @@ class ProfilePicture (val fragment : AccountSettingsScreen , val binding : Fragm
     val storage = Firebase.storage
     var storageRef = storage.reference
     var firebaseProfilePictureRef = storageRef.child("Users/$userId/profilePictures/profilePicture_$userId.jpg")
+    lateinit var getContentLauncher : ActivityResultLauncher<String>
+    lateinit var takePictureLauncher : ActivityResultLauncher<Uri>
+    private var uri: Uri? = null
 
     init {
 
         setProfilePicture()
-        pickProfilePicture()
+        initRegisterForActivityResult()
+
+        binding.buttonProfilePicture!!.setOnClickListener {
+
+            fragment.findNavController()
+                .navigate(com.enesproje.firebaseauth.AccountSettingsScreenDirections.actionAccountSettingsScreenToLoadProfilePicture())
+
+        }
+
+        fragment.findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("chosenItem")?.observe(fragment.viewLifecycleOwner) {
+
+            when (it) {
+
+                "gallery" -> getContentLauncher.launch("image/*")
+
+                "camera" -> takePicture()
+
+            }
+
+        }
+
+    }
+
+    private fun takePicture() {
+
+        val directory = fragment.requireContext().cacheDir
+        val file = File(directory,"profilePicture_$userId.jpg")
+
+
+        if (!file.exists()){
+
+            file.parentFile.mkdirs()
+            file.createNewFile()
+
+        }
+
+        uri = FileProvider.getUriForFile(fragment.requireContext(),"com.enesproje.firebaseauth",file)
+        takePictureLauncher.launch(uri)
+
 
     }
 
 
     private fun setProfilePicture() {
 
-        //val imagePath = fragment.requireContext().getDir("profilePictures", Context.MODE_PRIVATE).absolutePath
-        val imagePath2 = fragment.requireContext().filesDir.absolutePath + File.separator + "profilePictures"
+        //val imagePath2 = fragment.requireContext().getDir("profilePictures", Context.MODE_PRIVATE).absolutePath
+        val imagePath = fragment.requireContext().filesDir.absolutePath + File.separator + "profilePictures"
 
         try {
-            val f = File(imagePath2, "profilePicture_$userId.jpg")
+            val f = File(imagePath, "profilePicture_$userId.jpg")
             val b = BitmapFactory.decodeStream(FileInputStream(f))
             val img = binding.buttonProfilePicture
 
@@ -57,6 +103,20 @@ class ProfilePicture (val fragment : AccountSettingsScreen , val binding : Fragm
 
         }
 
+
+    }
+
+    private fun temporarilySetProfilePicture(){
+
+        val imagePath = fragment.requireContext().cacheDir.absolutePath
+        val f = File(imagePath, "profilePicture_$userId.jpg")
+        val b = BitmapFactory.decodeStream(FileInputStream(f))
+        val img = binding.buttonProfilePicture
+        Glide.with(fragment)
+            .asBitmap()
+            .load(b)
+            .transform(MultiTransformation(CenterCrop(), RoundedCorners(100)))
+            .into(img!!)
 
     }
 
@@ -94,9 +154,9 @@ class ProfilePicture (val fragment : AccountSettingsScreen , val binding : Fragm
 
     }
 
-    private fun pickProfilePicture() {
+    private fun initRegisterForActivityResult() {
 
-        val getContent = fragment.registerForActivityResult(ActivityResultContracts.GetContent()) {
+        getContentLauncher = fragment.registerForActivityResult(ActivityResultContracts.GetContent()) {
 
             if (it != null) {
 
@@ -107,15 +167,43 @@ class ProfilePicture (val fragment : AccountSettingsScreen , val binding : Fragm
 
                 fragment.anyChanges["profilePicture"] = true
 
-                fragment.makeSaveButtonVisible()
+                fragment.setSaveButtonVisible()
 
             }
 
         }
 
-        binding.buttonProfilePicture!!.setOnClickListener {
+        takePictureLauncher = fragment.registerForActivityResult(ActivityResultContracts.TakePicture()) {
 
-            getContent.launch("image/*")
+            Log.e(TAG,"takePictureLauncher result : $it")
+
+            if (it == true) {
+
+                temporarilySetProfilePicture()
+
+                fragment.anyChanges["profilePicture"] = true
+
+                fragment.setSaveButtonVisible()
+
+            }
+
+//            MainScope().launch(Dispatchers.IO) {
+//
+//                val file = File(fragment.requireContext().cacheDir.absolutePath + File.separator + "profilePicture_$userId.jpg")
+//
+//                var uploadTask = firebaseProfilePictureRef.putBytes(file.readBytes())
+//                    .addOnSuccessListener {
+//
+//                        Log.e(TAG,"Loading of profile picture to firebase is successful")
+//
+//                    }
+//                    .addOnFailureListener { exception ->
+//
+//                        Log.e(TAG,"Loading of profile picture to firebase has failed. Exception : ${exception.message}")
+//
+//                    }
+//
+//            }
 
         }
 
@@ -125,7 +213,7 @@ class ProfilePicture (val fragment : AccountSettingsScreen , val binding : Fragm
 
         val bitmap = binding.buttonProfilePicture!!.drawable.toBitmap()
 
-        fragment.makeSaveButtonGone()
+        fragment.setSaveButtonGone()
 
         MainScope().launch(Dispatchers.IO) {
 
