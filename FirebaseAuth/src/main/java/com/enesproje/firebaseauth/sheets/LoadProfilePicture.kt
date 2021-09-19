@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.enesproje.firebaseauth.databinding.FragmentLoadProfilePictureBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class LoadProfilePicture : BottomSheetDialogFragment() {
@@ -24,8 +26,12 @@ class LoadProfilePicture : BottomSheetDialogFragment() {
 
         setComponents()
 
-
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun setComponents() {
@@ -45,5 +51,6 @@ class LoadProfilePicture : BottomSheetDialogFragment() {
         }
 
     }
+
 
 }

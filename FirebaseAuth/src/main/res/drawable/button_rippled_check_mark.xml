@@ -9,6 +9,6 @@
         </shape>
     </item>
 
-    <item android:drawable="@drawable/check_mark" />
+    <item android:drawable="@drawable/button_check_mark" />
 
 </ripple>

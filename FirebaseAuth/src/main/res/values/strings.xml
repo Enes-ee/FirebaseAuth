@@ -50,6 +50,11 @@
 
     <string name="leaveAppWarning">You are leaving the app. \nAre you sure? </string>
 
+    //LoadProfilePicture
+
+    <string name="lpp_title"> Change Your Profile Picture </string>
+    <string name="lpp_line1_text"> Take a Picture </string>
+    <string name="lpp_line2_text"> Pick from Gallery </string>
 
 </resources>
 

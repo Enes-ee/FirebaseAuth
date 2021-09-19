@@ -97,7 +97,7 @@ class AccountSettingsScreen : Fragment() {
                 }
 
             it.isEnabled = false
-            it.background = ContextCompat.getDrawable(this@AccountSettingsScreen.requireContext(),R.drawable.disabled_edit_button)
+            it.background = ContextCompat.getDrawable(this@AccountSettingsScreen.requireContext(),R.drawable.button_disabled_editable)
 
             timer = object : CountDownTimer(30000,1000){
 
@@ -111,7 +111,7 @@ class AccountSettingsScreen : Fragment() {
 
                     it.isEnabled = true
                     binding.buttonVerifyEmail.text = "VERIFY"
-                    it.background = ContextCompat.getDrawable(this@AccountSettingsScreen.requireContext(),R.drawable.edit_button)
+                    it.background = ContextCompat.getDrawable(this@AccountSettingsScreen.requireContext(),R.drawable.button_rippled_editable)
 
                 }
 
@@ -433,7 +433,7 @@ class AccountSettingsScreen : Fragment() {
                 //Layout rearrange
 
                 tvVerifyEmail.visibility = View.INVISIBLE
-                buttonVerifyEmail.background = ContextCompat.getDrawable(this@AccountSettingsScreen.requireContext(),R.drawable.successful_passive_button)
+                buttonVerifyEmail.background = ContextCompat.getDrawable(this@AccountSettingsScreen.requireContext(),R.drawable.button_successful)
                 buttonVerifyEmail.text = getString(R.string.verified_email)
                 buttonVerifyEmail.isEnabled = false
                 (buttonVerifyEmail.layoutParams as ConstraintLayout.LayoutParams).topToBottom = binding.settingsEmail.id
